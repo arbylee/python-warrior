@@ -27,6 +27,11 @@ class TestAbilityBase(unittest.TestCase):
         mock_space.return_value = space
         self.assertEqual(self.ability.unit('right', 3, 1), 'unit')
 
+    def test_should_have_no_description(self):
+        self.assertEqual(self.ability.description(), None)
+
+    def test_should_raise_an_exception_if_direction_isnt_recognized(self):
+        self.assertRaises(Exception, self.ability.verify_direction, 'foo')
 
 if __name__ == '__main__':
     unittest.main()

@@ -20,7 +20,7 @@ class Floor(object):
         return filter(lambda unit: unit.position != None, self.units_attr)
 
     def out_of_bounds(self, x, y):
-        x < 0 or y < 0 or x > self.width-1 or y > self.height-1
+        return x < 0 or y < 0 or x > self.width-1 or y > self.height-1
 
     def space(self, x, y):
         return Space(self, x, y)

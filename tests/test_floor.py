@@ -26,10 +26,10 @@ class TestFloor(unittest.TestCase):
         self.assertFalse(self.floor.out_of_bounds(0,2))
 
     def test_should_consider_corner_out_of_bounds_when_beyond_sides(self):
-        self.assertFalse(self.floor.out_of_bounds(-1,0))
-        self.assertFalse(self.floor.out_of_bounds(0,-1))
-        self.assertFalse(self.floor.out_of_bounds(0,3))
-        self.assertFalse(self.floor.out_of_bounds(2,0))
+        self.assertTrue(self.floor.out_of_bounds(-1,0))
+        self.assertTrue(self.floor.out_of_bounds(0,-1))
+        self.assertTrue(self.floor.out_of_bounds(0,3))
+        self.assertTrue(self.floor.out_of_bounds(2,0))
 
     @unittest.skip
     def test_should_fetch_other_units_not_warrior(self):

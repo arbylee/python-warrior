@@ -18,16 +18,14 @@ class TestUnitBase(unittest.TestCase):
         self.assertTrue(self.unit.is_alive())
 
     def test_should_default_max_health_to_0(self):
-        self.assertEqual(self.unit.max_health(), 0)
+        self.assertEqual(self.unit.max_health, 0)
 
-    @mock.patch('pythonwarrior.units.base.UnitBase.max_health')
-    def test_should_default_health_to_max_health(self, mock_max_health):
-        mock_max_health.return_value = 10
+    @mock.patch('pythonwarrior.units.base.UnitBase.max_health', 10)
+    def test_should_default_health_to_max_health(self):
         self.assertEqual(self.unit.health(), 10)
 
-    @mock.patch('pythonwarrior.units.base.UnitBase.max_health')
-    def test_should_subtract_health_when_taking_damage(self, mock_max_health):
-        mock_max_health.return_value = 10
+    @mock.patch('pythonwarrior.units.base.UnitBase.max_health', 10)
+    def test_should_subtract_health_when_taking_damage(self):
         self.unit.take_damage(3)
         self.assertEqual(self.unit.health(), 7)
 
@@ -48,10 +46,25 @@ class TestUnitBase(unittest.TestCase):
         self.unit.prepare_turn()
         mock_play_turn.assert_called_with('next_turn')
 
+    @mock.patch('pythonwarrior.units.base.Walk')
+    def test_should_add_abilities_to_abilities_dict(self, mock_walk):
+        mock_walk.return_value = 'walk'
+        self.unit.add_abilities("walk!")
+        self.assertEqual(self.unit.abilities, {'walk!': 'walk'})
+
+    def test_should_appear_as_question_mark_on_map(self):
+        self.assertEqual(self.unit.character(), "?")
+
+    @mock.patch('pythonwarrior.units.base.UnitBase.max_health', 10)
+    def test_should_be_released_from_bonds_when_taking_damage(self):
+        self.unit.bind()
+        self.assertTrue(self.unit.is_bound())
+        self.unit.take_damage(2)
+        self.assertFalse(self.unit.is_bound())
+
     @unittest.skip
-    def test_should_add_abilities_to_abilities_dict(self):
-        self.unit.add_abilities("walk")
-        self.assertEqual(self.unit.abilities, {'walk': 'something'})
+    def test_should_be_released_from_bonds_when_calling_release(self):
+        assertTrue(False)
 
 if __name__ == '__main__':
     unittest.main()

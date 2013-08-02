@@ -1,7 +1,20 @@
+from pythonwarrior.abilities.walk import Walk
 class UnitBase(object):
     def __init__(self):
         self.position = None
         self.health_attr = None
+        self.abilities_attr = None
+        self.bound = False
+
+    @property
+    def abilities(self):
+        if not self.abilities_attr:
+            self.abilities_attr = {}
+        return self.abilities_attr
+
+    @property
+    def max_health(self):
+        return 0
 
     def __repr__(self):
         return self.__class__.__name__
@@ -12,15 +25,14 @@ class UnitBase(object):
     def is_alive(self):
         return self.position != None
 
-    def max_health(self):
-        return 0
-
     def health(self):
         if not self.health_attr:
-            self.health_attr = self.max_health()
+            self.health_attr = self.max_health
         return self.health_attr
 
     def take_damage(self, amount):
+        if self.is_bound():
+            self.unbind()
         if self.health():
             self.health_attr -= amount
             if self.health() <= 0:
@@ -39,3 +51,26 @@ class UnitBase(object):
 
     def play_turn(self, turn):
         return None
+
+    def is_bound(self):
+        return self.bound
+
+    def add_abilities(self, *new_abilities):
+        for ability in new_abilities:
+            self.abilities[ability] = eval("%s(self)" % ability.replace("!", "").capitalize())
+
+    def say(self, msg):
+        print msg
+
+    def character(self):
+        return "?"
+
+    def bind(self):
+        self.bound = True
+
+    def is_bound(self):
+        return self.bound
+
+    def unbind(self):
+        self.say("released from bonds")
+        self.bound = False

@@ -1,5 +1,6 @@
 class Position(object):
     DIRECTIONS = ["north", "east", "south", "west"]
+    RELATIVE_DIRECTIONS = ["forward", "right", "backward", "left"]
     def __init__(self, floor, x, y, direction=None):
         self.floor = floor
         self.x = x
