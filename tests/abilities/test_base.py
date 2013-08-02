@@ -25,7 +25,6 @@ class TestAbilityBase(unittest.TestCase):
         space = mock.Mock()
         space.unit = 'unit'
         mock_space.return_value = space
-        print space.unit
         self.assertEqual(self.ability.unit('right', 3, 1), 'unit')
 
 
