@@ -47,5 +47,5 @@ class TestWarrior(unittest.TestCase):
         self.assertEqual(self.warrior.character(), "@")
 
     def test_should_be_able_to_add_golem_abilities_which_are_used_on_base_golem(self):
-        self.warrior.add_golem_abilities("walk!")
-        self.assertEqual(self.warrior.base_golem().abilities.keys(), ["walk!"])
+        self.warrior.add_golem_abilities("walk")
+        self.assertEqual(self.warrior.base_golem().abilities.keys(), ["walk"])

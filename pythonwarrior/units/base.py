@@ -1,4 +1,6 @@
+import re
 from pythonwarrior.abilities.walk import Walk
+from pythonwarrior.turn import Turn
 class UnitBase(object):
     def __init__(self):
         self.position = None
@@ -47,7 +49,7 @@ class UnitBase(object):
         self.play_turn(self.current_turn)
 
     def next_turn(self):
-        return None
+        return Turn(self.abilities)
 
     def play_turn(self, turn):
         return None
@@ -57,7 +59,7 @@ class UnitBase(object):
 
     def add_abilities(self, *new_abilities):
         for ability in new_abilities:
-            self.abilities[ability] = eval("%s(self)" % ability.replace("!", "").capitalize())
+            self.abilities[ability] = eval("%s(self)" % re.sub("_$", "", ability).capitalize())
 
     def say(self, msg):
         print msg
@@ -74,3 +76,16 @@ class UnitBase(object):
     def unbind(self):
         self.say("released from bonds")
         self.bound = False
+
+    def perform_turn(self):
+        if self.position:
+            for ability in self.abilities.values():
+                ability.pass_turn()
+            if self.current_turn.action and not self.is_bound():
+                name = self.current_turn.action[0]
+                args = self.current_turn.action[1:]
+                print "PERFORMIING"
+                print name
+                print args
+                print self.abilities[name]
+                self.abilities[name].perform(*args)
