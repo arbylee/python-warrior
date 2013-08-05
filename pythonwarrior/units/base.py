@@ -1,10 +1,13 @@
 import re
 from pythonwarrior.abilities.walk import Walk
+from pythonwarrior.abilities.attack import Attack
+from pythonwarrior.abilities.feel import Feel
+from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.turn import Turn
 class UnitBase(object):
     def __init__(self):
         self.position = None
-        self.health_attr = None
+        self._health = None
         self.abilities_attr = None
         self.bound = False
 
@@ -19,25 +22,31 @@ class UnitBase(object):
         return 0
 
     def __repr__(self):
-        return self.__class__.__name__
+        return self.name()
 
+    @property
     def attack_power(self):
         return 0
 
     def is_alive(self):
         return self.position != None
 
+    @property
     def health(self):
-        if not self.health_attr:
-            self.health_attr = self.max_health
-        return self.health_attr
+        if not self._health:
+            self._health = self.max_health
+        return self._health
+
+    @health.setter
+    def health(self, value):
+        self._health = value
 
     def take_damage(self, amount):
         if self.is_bound():
             self.unbind()
-        if self.health():
-            self.health_attr -= amount
-            if self.health() <= 0:
+        if self.health:
+            self.health -= amount
+            if self.health <= 0:
                 self.position = None
                 print "dies"
 
@@ -64,6 +73,7 @@ class UnitBase(object):
     def say(self, msg):
         print msg
 
+    @property
     def character(self):
         return "?"
 
@@ -84,8 +94,4 @@ class UnitBase(object):
             if self.current_turn.action and not self.is_bound():
                 name = self.current_turn.action[0]
                 args = self.current_turn.action[1:]
-                print "PERFORMIING"
-                print name
-                print args
-                print self.abilities[name]
                 self.abilities[name].perform(*args)

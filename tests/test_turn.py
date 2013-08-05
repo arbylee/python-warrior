@@ -1,3 +1,4 @@
+import mock
 import unittest
 from pythonwarrior.turn import Turn
 from pythonwarrior.abilities.feel import Feel
@@ -23,4 +24,10 @@ class TestTurnWithActions(unittest.TestCase):
 
 class TestTurnWithSenses(unittest.TestCase):
     def setUp(self):
-        self.feel = Feel()
+        with mock.patch('pythonwarrior.abilities.feel.Feel.space', mock.Mock()):
+            self.feel = Feel(mock.Mock())
+            self.turn = Turn({'feel': self.feel})
+
+    def test_should_be_able_to_call_sense_with_any_argument_and_return_expected_results(self):
+        self.assertEqual(self.turn.feel(), self.feel.perform())
+        self.assertEqual(self.turn.feel('backward'), self.feel.perform('backward'))

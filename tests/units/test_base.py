@@ -7,7 +7,7 @@ class TestUnitBase(unittest.TestCase):
         self.unit = UnitBase()
 
     def test_should_have_attack_of_zero(self):
-        self.assertEqual(self.unit.attack_power(), 0)
+        self.assertEqual(self.unit.attack_power, 0)
 
     def test_should_be_dead_if_no_position(self):
         self.assertEqual(self.unit.position, None)
@@ -22,12 +22,12 @@ class TestUnitBase(unittest.TestCase):
 
     @mock.patch('pythonwarrior.units.base.UnitBase.max_health', 10)
     def test_should_default_health_to_max_health(self):
-        self.assertEqual(self.unit.health(), 10)
+        self.assertEqual(self.unit.health, 10)
 
     @mock.patch('pythonwarrior.units.base.UnitBase.max_health', 10)
     def test_should_subtract_health_when_taking_damage(self):
         self.unit.take_damage(3)
-        self.assertEqual(self.unit.health(), 7)
+        self.assertEqual(self.unit.health, 7)
 
     @mock.patch('pythonwarrior.units.base.UnitBase.max_health')
     def test_should_set_position_to_none_when_out_of_health(self, mock_max_health):
@@ -97,7 +97,7 @@ class TestUnitBase(unittest.TestCase):
         self.assertEqual(self.unit.abilities, {'walk_': 'walk'})
 
     def test_should_appear_as_question_mark_on_map(self):
-        self.assertEqual(self.unit.character(), "?")
+        self.assertEqual(self.unit.character, "?")
 
     @mock.patch('pythonwarrior.units.base.UnitBase.max_health', 10)
     def test_should_be_released_from_bonds_when_taking_damage(self):

@@ -19,3 +19,11 @@ class Golem(UnitBase):
         if self.turn:
             self.turn(turn)
 
+    @property
+    def character(self):
+        return "G"
+
+    @property
+    def attack_power(self):
+        return 3
+

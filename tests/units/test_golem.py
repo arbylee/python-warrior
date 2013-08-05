@@ -15,8 +15,10 @@ class TestGolem(unittest.TestCase):
     def test_should_set_max_health_and_update_current_health(self):
         self.golem.max_health = 10
         self.assertEqual(self.golem.max_health, 10)
-        self.assertEqual(self.golem.health(), 10)
+        self.assertEqual(self.golem.health, 10)
 
     def test_should_have_attack_power_of_3(self):
-        None
+        self.assertEqual(self.golem.attack_power, 3)
 
+    def test_should_appear_as_G_on_map(self):
+        self.assertEqual(self.golem.character, 'G')

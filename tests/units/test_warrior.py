@@ -38,13 +38,13 @@ class TestWarrior(unittest.TestCase):
         self.assertEqual(self.warrior.player(), player)
 
     def test_should_have_an_attack_power_of_5(self):
-        self.assertEqual(self.warrior.attack_power(), 5)
+        self.assertEqual(self.warrior.attack_power, 5)
 
     def test_should_have_a_shoot_power_of_3(self):
-        self.assertEqual(self.warrior.shoot_power(), 3)
+        self.assertEqual(self.warrior.shoot_power, 3)
 
     def test_should_appear_as_AT_symbol_on_map(self):
-        self.assertEqual(self.warrior.character(), "@")
+        self.assertEqual(self.warrior.character, "@")
 
     def test_should_be_able_to_add_golem_abilities_which_are_used_on_base_golem(self):
         self.warrior.add_golem_abilities("walk")
