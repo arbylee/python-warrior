@@ -1,0 +1,33 @@
+Level {{level.number}}
+
+{{level.description}}
+
+Tip: {{level.tip}}
+
+{{level.floor.character}}
+
+  > = Stairs
+{% for unit in level.floor.unique_units %}
+  {{unit.character}} = {{unit.name()}} ({{unit.max_health}} HP)
+{% endfor %}
+
+
+Warrior Abilities:
+{% for name, ability in level.warrior.abilities.iteritems() %}
+
+  warrior.{{name}}
+    {{ability.description()}}
+{% endfor %}
+{% if level.warrior.has_golem() %}
+
+
+Golem Abilities:
+{% for name, ability in level.warrior.base_golem.abilities.iteritems() %}
+
+  golem.{{name}}
+    {{ability.description()}}
+{% endfor %}
+{% endif %}
+
+
+When you're done editing player.rb, run the rubywarrior command again.

@@ -10,16 +10,13 @@ class UnitBase(object):
         self._health = None
         self.abilities_attr = None
         self.bound = False
+        self.max_health = 0
 
     @property
     def abilities(self):
         if not self.abilities_attr:
             self.abilities_attr = {}
         return self.abilities_attr
-
-    @property
-    def max_health(self):
-        return 0
 
     def __repr__(self):
         return self.name()
@@ -37,15 +34,11 @@ class UnitBase(object):
             self._health = self.max_health
         return self._health
 
-    @health.setter
-    def health(self, value):
-        self._health = value
-
     def take_damage(self, amount):
         if self.is_bound():
             self.unbind()
         if self.health:
-            self.health -= amount
+            self._health -= amount
             if self.health <= 0:
                 self.position = None
                 print "dies"

@@ -9,6 +9,7 @@ class Warrior(UnitBase):
         self.name_attr = None
         self.score = 0
         self.golem_abilities = []
+        self.max_health = 20
 
     def play_turn(self, turn):
         return self.player().play_turn(turn)
@@ -31,9 +32,6 @@ class Warrior(UnitBase):
     @property
     def shoot_power(self):
         return 3
-
-    def max_health(self):
-        return 20
 
     def name(self):
         if self.name_attr:

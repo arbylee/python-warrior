@@ -15,7 +15,7 @@ class TestWarrior(unittest.TestCase):
         self.assertEqual(str(self.warrior), "Joe")
 
     def test_should_have_20_max_health(self):
-        self.assertEqual(self.warrior.max_health(), 20)
+        self.assertEqual(self.warrior.max_health, 20)
 
     def test_should_have_0_score_at_beginning_and_be_able_to_earn_points(self):
         self.assertEqual(self.warrior.score, 0)

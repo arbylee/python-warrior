@@ -3,10 +3,7 @@ class Captive(UnitBase):
     def __init__(self):
         super(Captive, self).__init__()
         self.bind()
-
-    @property
-    def max_health(self):
-        return 1
+        self.max_health = 1
 
     @property
     def character(self):

@@ -12,7 +12,7 @@ class TestAttack(unittest.TestCase):
     def test_should_subtract_attack_power_amount_from_health(self, mock_unit):
         receiver = UnitBase()
         receiver.position = mock.Mock()
-        receiver.health = 5
+        receiver._health = 5
         mock_unit.return_value = receiver
         self.attack.perform()
         self.assertEqual(receiver.health, 2)
