@@ -4,6 +4,7 @@ from pythonwarrior.player_generator import PlayerGenerator
 from pythonwarrior.level import Level
 from pythonwarrior.profile import Profile
 
+
 class TestPlayerGenerator(unittest.TestCase):
     def setUp(self):
         self.level = Level(Profile(), 15)

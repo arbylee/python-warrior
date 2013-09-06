@@ -8,9 +8,6 @@ class PlayerGenerator(object):
         self.level = level
         self.previous_level = Level(self.level.profile, self.level.number-1)
 
-    def templates_path(self):
-        return os.path.normpath(os.path.dirname(__file__) + "/templates")
-
     def generate(self):
         if self.level.number == 1:
             if not os.path.exists(self.level.player_path()):
@@ -27,3 +24,6 @@ class PlayerGenerator(object):
         readme = open(self.level.player_path() + '/README', 'w')
         readme.write(readme_template.render())
         readme.close()
+
+    def templates_path(self):
+        return os.path.normpath(os.path.dirname(__file__) + "/templates")

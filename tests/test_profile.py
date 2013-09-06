@@ -5,6 +5,7 @@ import unittest
 from pythonwarrior.profile import Profile
 from pythonwarrior.tower import Tower
 
+
 class TestProfile(unittest.TestCase):
     def setUp(self):
         self.profile = Profile()

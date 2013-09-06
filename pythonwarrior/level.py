@@ -1,5 +1,7 @@
 import os
 from pythonwarrior.level_loader import LevelLoader
+
+
 class Level(object):
     @staticmethod
     def grade_letter(percent):
@@ -21,6 +23,7 @@ class Level(object):
         self.number = number
         self.time_bonus = 0
         self.ace_score = None
+        self.clue = None
 
     def player_path(self):
         return self.profile.player_path
@@ -29,8 +32,8 @@ class Level(object):
         return os.path.join(
             os.path.normpath(os.path.abspath(__file__) + '../../towers'),
             os.path.basename(self.profile.tower_path) +
-                "/level_" + str(self.number).rjust(3, '0') +
-                '.py'
+            "/level_" + str(self.number).rjust(3, '0') +
+            '.py'
         )
 
     def load_level(self):
@@ -45,6 +48,8 @@ class Level(object):
         if self.ace_score:
             return Level.grade_letter(score/float(self.ace_score))
 
+    def exists(self):
+        return os.path.exists(self.load_path())
 
     def setup_warrior(self, warrior):
         self.warrior = warrior

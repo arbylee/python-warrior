@@ -1,7 +1,7 @@
 import mock
 import unittest
-from pythonwarrior.level_loader import LevelLoader
 from pythonwarrior.level import Level
+from pythonwarrior.level_loader import LevelLoader
 from pythonwarrior.profile import Profile
 from pythonwarrior.units.warrior import Warrior
 

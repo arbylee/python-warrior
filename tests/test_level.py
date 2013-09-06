@@ -6,6 +6,7 @@ from pythonwarrior.profile import Profile
 from pythonwarrior.floor import Floor
 from pythonwarrior.units.warrior import Warrior
 
+
 class TestLevel(unittest.TestCase):
     def setUp(self):
         self.profile = Profile()
@@ -38,8 +39,10 @@ class TestLevel(unittest.TestCase):
         self.assertIsNone(self.level.grade_for(100))
 
     def test_should_load_file_contents_into_level(self):
-        with mock.patch.object(self.level, 'load_path', return_value='path/to/level.py'):
-            mock_file = mock.Mock(read=mock.Mock(return_value="description('foo')"))
+        with mock.patch.object(self.level, 'load_path',
+                               return_value='path/to/level.py'):
+            mock_file = mock.Mock(
+                read=mock.Mock(return_value="description('foo')"))
             with mock.patch('__builtin__.open',
                             return_value=mock_file):
                 self.level.load_level()
@@ -49,22 +52,32 @@ class TestLevel(unittest.TestCase):
         with mock.patch.object(self.profile, '_player_path', 'path/to/player'):
             self.assertEqual(self.level.player_path(), 'path/to/player')
 
-    def test_should_have_a_load_path_from_profile_tower_with_level_number_in_it(self):
+    def test_should_have_load_path_from_profile_tower_with_level_number(self):
         with mock.patch.object(self.profile, 'tower_path', 'path/to/tower'):
             self.assertEqual(self.level.load_path(),
-                             os.path.abspath('pythonwarrior/towers/tower/level_001.py'))
+                             os.path.abspath(
+                                 'pythonwarrior/towers/tower/level_001.py'))
 
-    @unittest.skip
-    def test_should_exist_if_file_exists(self):
-        self.assertTrue(False)
+    @mock.patch('pythonwarrior.level.os.path.exists')
+    def test_should_exist_if_file_exists(self, mock_exists):
+        self.level.load_path = mock.Mock(return_value='/foo/bar')
+        mock_exists.return_value = True
+        self.assertTrue(self.level.exists())
+        mock_exists.assert_called_once_with('/foo/bar')
 
     @unittest.skip
     def test_should_load_player_and_player_path(self):
-        self.level
+        self.fail('Figure out how to add player path to the load path')
+        self.level.load_player()
 
     @unittest.skip
-    def test_should_generate_player_files(self):
-        self.level
+    @mock.patch('pythonwarrior.level.PlayerGenerator')
+    def test_should_generate_player_files(self, mock_pg):
+        generator = mock.Mock()
+        mock_pg.return_value = generator
+        self.level.generate_player_files()
+        generator.generate.assert_called_once_with()
+        mock_pg.assert_called_once_with(self.level)
 
     def test_should_setup_warrior_with_profile_abilities(self):
         self.profile.abilities = ['foo', 'bar']
