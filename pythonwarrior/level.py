@@ -1,5 +1,6 @@
 import os
 from pythonwarrior.level_loader import LevelLoader
+from pythonwarrior.ui import UI
 
 
 class Level(object):
@@ -24,6 +25,8 @@ class Level(object):
         self.time_bonus = 0
         self.ace_score = None
         self.clue = None
+        self.warrior = None
+        self.description = None
 
     def player_path(self):
         return self.profile.player_path
@@ -41,8 +44,27 @@ class Level(object):
         f = open(self.load_path())
         eval("level." + f.read())
 
+    def play(self, turns=1000, fxn=None):
+        self.load_level()
+        for turn in range(turns):
+            if self.is_passed() or self.is_failed():
+                return
+            UI.puts('- turn %d -' % turn+1)
+            UI.write(self.floor.character)
+            for unit in self.floor.units:
+                unit.prepare_turn()
+            for unit in self.floor.units:
+                unit.perform_turn()
+            if fxn:
+                fxn()
+            if self.time_bonus > 0:
+                self.time_bonus -= 1
+
     def is_passed(self):
         return self.floor.stairs_space().is_warrior()
+
+    def is_failed(self):
+        return self.warrior not in self.floor.units
 
     def grade_for(self, score):
         if self.ace_score:

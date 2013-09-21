@@ -70,15 +70,6 @@ class TestLevel(unittest.TestCase):
         self.fail('Figure out how to add player path to the load path')
         self.level.load_player()
 
-    @unittest.skip
-    @mock.patch('pythonwarrior.level.PlayerGenerator')
-    def test_should_generate_player_files(self, mock_pg):
-        generator = mock.Mock()
-        mock_pg.return_value = generator
-        self.level.generate_player_files()
-        generator.generate.assert_called_once_with()
-        mock_pg.assert_called_once_with(self.level)
-
     def test_should_setup_warrior_with_profile_abilities(self):
         self.profile.abilities = ['foo', 'bar']
         warrior = mock.Mock()
@@ -91,3 +82,15 @@ class TestLevel(unittest.TestCase):
         self.level.setup_warrior(warrior)
         self.assertEqual(warrior.name, "Joe")
 
+
+class TestPlaying(TestLevel):
+    def setUp(self):
+        self.profile = Profile()
+        self.floor = Floor()
+        self.level = Level(self.profile, 1)
+        self.level.floor = self.floor
+
+    def test_load_level_once_when_playing_multiple_turns(self):
+        self.level.load_level = mock.Mock()
+        self.level.play(2)
+        self.level.load_level.assert_called_once_with()

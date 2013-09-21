@@ -1,6 +1,8 @@
 from pythonwarrior.floor import Floor
 from pythonwarrior.units.warrior import Warrior
 from pythonwarrior.units.base import UnitBase
+
+
 class LevelLoader(object):
     def __init__(self, level):
         self.floor = Floor()

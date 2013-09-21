@@ -4,6 +4,7 @@ from pythonwarrior.ui import UI
 from pythonwarrior.config import Config
 from pythonwarrior.profile import Profile
 from pythonwarrior.tower import Tower
+from pythonwarrior.player_generator import PlayerGenerator
 
 
 class Game(object):
@@ -59,6 +60,10 @@ class Game(object):
                                "additional clues for this level?"):
                         UI.puts(self.current_level().clue.hard_wrap)
         return continue_play
+
+    def prepare_next_level(self):
+        self.next_level().load_level()
+        PlayerGenerator(self.next_level()).generate()
 
     def profiles(self):
         return map(lambda profile: Profile.load(profile), self.profile_paths())
