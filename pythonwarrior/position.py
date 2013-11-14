@@ -8,6 +8,4 @@ class Position(object):
         self.direction_index = Position.DIRECTIONS.index(direction or "north")
 
     def at(self, x, y):
-        print self.x
-        print self.y
         return self.x == x and self.y == y

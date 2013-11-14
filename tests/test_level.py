@@ -1,6 +1,8 @@
 import mock
 import os
+import sys
 import unittest
+import pythonwarrior
 from pythonwarrior.level import Level
 from pythonwarrior.profile import Profile
 from pythonwarrior.floor import Floor
@@ -13,7 +15,6 @@ class TestLevel(unittest.TestCase):
         self.floor = Floor()
         self.level = Level(self.profile, 1)
         self.level.floor = self.floor
-        #stub failed
 
     def test_should_consider_passed_When_warrior_is_on_stairs(self):
         self.level.warrior = Warrior()
@@ -65,10 +66,19 @@ class TestLevel(unittest.TestCase):
         self.assertTrue(self.level.exists())
         mock_exists.assert_called_once_with('/foo/bar')
 
-    @unittest.skip
-    def test_should_load_player_and_player_path(self):
-        self.fail('Figure out how to add player path to the load path')
+    @mock.patch('__builtin__.reload')
+    def test_should_load_player_and_player_path(self, mock_reload):
+        self.level.player_path = mock.Mock(return_value='/player/path')
         self.level.load_player()
+
+    @mock.patch('pythonwarrior.level.PlayerGenerator')
+    def test_should_generate_player_files(self, mock_pg):
+        generator = mock.Mock()
+        mock_pg.return_value = generator
+        self.level.load_level = mock.Mock()
+        self.level.generate_player_files()
+        generator.generate.assert_called_once_with()
+        self.level.load_level.assert_called_once_with()
 
     def test_should_setup_warrior_with_profile_abilities(self):
         self.profile.abilities = ['foo', 'bar']
@@ -83,14 +93,95 @@ class TestLevel(unittest.TestCase):
         self.assertEqual(warrior.name, "Joe")
 
 
-class TestPlaying(TestLevel):
+class TestPlaying(unittest.TestCase):
     def setUp(self):
         self.profile = Profile()
         self.floor = Floor()
         self.level = Level(self.profile, 1)
         self.level.floor = self.floor
+        self.level.load_level = mock.Mock()
+        self.level.is_failed = mock.Mock(return_value=False)
 
     def test_load_level_once_when_playing_multiple_turns(self):
-        self.level.load_level = mock.Mock()
         self.level.play(2)
         self.level.load_level.assert_called_once_with()
+
+    def test_should_call_prepare_turn_and_play_turn_on_each_object_specified_number_of_times(self):
+        unit = Warrior()
+        unit.prepare_turn = mock.Mock()
+        unit.perform_turn = mock.Mock()
+        self.floor.add(unit, 0, 0, 'north')
+        self.level.play(2)
+        unit.prepare_turn.assert_called_with()
+        unit.perform_turn.assert_called_with()
+        self.assertEqual(2, unit.prepare_turn.call_count)
+        self.assertEqual(2, unit.perform_turn.call_count)
+
+    def test_should_return_immediately_when_passed(self):
+        unit = Warrior()
+        unit.turn = mock.Mock()
+        self.floor.add(unit, 0, 0, 'north')
+        self.level.is_passed = mock.Mock(return_value=True)
+        self.level.play(2)
+
+    def test_call_fxn_in_play_for_each_turn(self):
+        self.i = 0
+
+        def foo():
+            self.i += 1
+
+        self.level.play(2, foo)
+        self.assertEqual(self.i, 2)
+
+    def test_should_count_down_time_bonus_once_each_turn(self):
+        self.level.time_bonus = 10
+        self.level.play(3)
+        self.assertEqual(self.level.time_bonus, 7)
+
+    def test_should_count_down_time_bonus_to_zero(self):
+        self.level.time_bonus = 2
+        self.level.play(5)
+        self.assertEqual(self.level.time_bonus, 0)
+
+    def test_should_have_a_pretty_score_calculation(self):
+        self.assertEqual(self.level.score_calculation(123, 45),
+                         "123 + 45 = 168")
+
+    def test_should_not_have_score_calc_when_starting_score_is_zero(self):
+        self.assertEqual(self.level.score_calculation(0, 45), "45")
+
+
+class TestTallying(unittest.TestCase):
+    def setUp(self):
+        self.profile = Profile()
+        self.floor = Floor()
+        self.level = Level(self.profile, 1)
+        self.level.floor = self.floor
+        self.level.load_level = mock.Mock()
+        self.level.is_failed = mock.Mock(return_value=False)
+        self.level.floor.other_units = mock.Mock(return_value=[mock.Mock()])
+        self.warrior = mock.Mock(score=0, abilities={})
+        self.level.warrior = self.warrior
+
+    def test_should_add_warrior_score_to_profile(self):
+        self.warrior.score = 30
+        self.profile.score = 0
+        self.level.tally_points()
+        self.assertEqual(self.profile.score, 30)
+
+    def test_should_apply_warrior_abilities_to_profile(self):
+        self.warrior.abilities = {'foo': None, 'bar': None}
+        self.level.tally_points()
+        self.assertEqual(['foo', 'bar'], self.profile.abilities)
+
+    def test_should_apply_time_bonus_to_profile_score(self):
+        self.level.time_bonus = 20
+        self.level.tally_points()
+        self.assertEqual(20, self.profile.score)
+
+    def test_should_give_20_percent_bonus_when_no_other_units_left(self):
+        self.level.floor.other_units = mock.Mock(return_value=[])
+        self.warrior.score = 10
+        self.level.time_bonus = 10
+        self.level.tally_points()
+        self.assertEqual(24, self.profile.score)

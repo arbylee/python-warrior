@@ -1,12 +1,11 @@
 import os
 from jinja2 import Environment, PackageLoader
-from pythonwarrior.level import Level
 
 
 class PlayerGenerator(object):
-    def __init__(self, level):
+    def __init__(self, level, previous_level):
         self.level = level
-        self.previous_level = Level(self.level.profile, self.level.number-1)
+        self.previous_level = previous_level
 
     def generate(self):
         if self.level.number == 1:
