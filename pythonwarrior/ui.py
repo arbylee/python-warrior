@@ -9,16 +9,16 @@ class UI(object):
             return Config.out_stream.write(msg + "\n")
 
     @staticmethod
-    def write(msg):
-        if Config.out_stream:
-            return Config.out_stream.write(msg)
-
-    @staticmethod
     def puts_with_delay(msg):
         result = UI.puts(msg)
         if Config.delay:
             time.sleep(Config.delay)
         return result
+
+    @staticmethod
+    def write(msg):
+        if Config.out_stream:
+            return Config.out_stream.write(msg)
 
     @staticmethod
     def gets():

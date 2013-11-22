@@ -31,13 +31,17 @@ class Space(object):
         return self.unit and self.unit.is_bound()
 
     def is_empty(self):
-        return self.unit == None and not self.is_wall()
+        return self.unit is None and not self.is_wall()
 
     def is_stairs(self):
         return self.floor.stairs_location == self.location()
 
     def is_ticking(self):
         return self.unit and 'explode_' in self.unit.abilities
+
+    @property
+    def unit(self):
+        return self.floor.get(self.x, self.y)
 
     def location(self):
         return [self.x, self.y]
@@ -50,8 +54,3 @@ class Space(object):
             return ">"
         else:
             return " "
-
-
-    @property
-    def unit(self):
-        return self.floor.get(self.x, self.y)
