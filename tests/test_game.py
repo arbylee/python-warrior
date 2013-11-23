@@ -36,7 +36,7 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.profiles(), [1, 2])
 
     @mock.patch('pythonwarrior.game.glob')
-    def test_should_fine_profile_paths_using_glob_search(self, mock_glob):
+    def test_should_find_profile_paths_using_glob_search(self, mock_glob):
         self.game.profile_paths()
         mock_glob.glob.assert_called_with('./pythonwarrior/**/.profile')
 
@@ -99,4 +99,13 @@ class TestGame(unittest.TestCase):
         mock_profile = mock.Mock(current_level=mock_level)
         self.game.profile = mock_profile
         self.game.current_level()
+        self.game.current_level()
+        mock_level.assert_called_once_with()
+
+    def test_should_fetch_next_level_from_profile_and_cache_it(self):
+        mock_level = mock.Mock(return_value='foo')
+        mock_profile = mock.Mock(next_level=mock_level)
+        self.game.profile = mock_profile
+        self.game.next_level()
+        self.game.next_level()
         mock_level.assert_called_once_with()

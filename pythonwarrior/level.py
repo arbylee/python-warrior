@@ -77,19 +77,6 @@ class Level(object):
             if self.time_bonus > 0:
                 self.time_bonus -= 1
 
-    def score_calculation(self, current_score, addition):
-        if current_score == 0:
-            return str(addition)
-        else:
-            return '%d + %d = %d' % (current_score, addition,
-                                     (current_score + addition))
-
-    def is_passed(self):
-        return self.floor.stairs_space().is_warrior()
-
-    def is_failed(self):
-        return self.warrior not in self.floor.units
-
     def tally_points(self):
         score = 0
 
@@ -117,6 +104,19 @@ class Level(object):
 
     def clear_bonus(self):
         return round((self.warrior.score + self.time_bonus) * 0.2)
+
+    def score_calculation(self, current_score, addition):
+        if current_score == 0:
+            return str(addition)
+        else:
+            return '%d + %d = %d' % (current_score, addition,
+                                     (current_score + addition))
+
+    def is_passed(self):
+        return self.floor.stairs_space().is_warrior()
+
+    def is_failed(self):
+        return self.warrior not in self.floor.units
 
     def exists(self):
         return os.path.exists(self.load_path())

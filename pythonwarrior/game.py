@@ -1,10 +1,12 @@
 import glob
 import os
-from pythonwarrior.ui import UI
+import shutil
+
 from pythonwarrior.config import Config
+from pythonwarrior.player_generator import PlayerGenerator
 from pythonwarrior.profile import Profile
 from pythonwarrior.tower import Tower
-from pythonwarrior.player_generator import PlayerGenerator
+from pythonwarrior.ui import UI
 
 
 class Game(object):
@@ -14,7 +16,16 @@ class Game(object):
         self._next_level = None
 
     def start(self):
-        pass
+        UI.puts('Welcome to Python Warrior')
+        if os.path.exists(Config.path_prefix + '/.profile'):
+            self.profile = Profile.load(Config.path_prefix + '/.profile')
+        else:
+            if os.path.exists(Config.path_prefix + '/python-warrior'):
+                shutil.move(Config.path_prefix + '/python-warrior',
+                            Config.path_prefix + '/pythonwarrior')
+
+        if not os.path.exists(Config.path_prefix + '/pythonwarrior'):
+            self.make_game_directory()
 
     def make_game_directory(self):
         if UI.ask("No rubywarrior directory found, \
@@ -60,6 +71,21 @@ class Game(object):
                                "additional clues for this level?"):
                         UI.puts(self.current_level().clue.hard_wrap)
         return continue_play
+
+    def request_next_level(self):
+        if not Config.skip_input:
+            if self.next_level():
+                if UI.ask('Would you like to continue on to the next level?'):
+                    self.prepare_next_level()
+                    UI.puts('See the updated README in the pythonwarrior/' +
+                            self.profile().directory_name() +
+                            ' directory')
+                else:
+                    UI.puts('Staying on current level.'
+                            'Try to earn more points next time.')
+            else:
+                UI.ask('Would you like to continue on to epic mode?')
+                UI.puts('Sorry, epic mode is not yet enabled!')
 
     def prepare_next_level(self):
         self.next_level().load_level()
