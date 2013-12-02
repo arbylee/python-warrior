@@ -43,7 +43,7 @@ class TestLevel(unittest.TestCase):
         with mock.patch.object(self.level, 'load_path',
                                return_value='path/to/level.py'):
             mock_file = mock.Mock(
-                read=mock.Mock(return_value="description('foo')"))
+                read=mock.Mock(return_value="level.description('foo')"))
             with mock.patch('__builtin__.open',
                             return_value=mock_file):
                 self.level.load_level()
