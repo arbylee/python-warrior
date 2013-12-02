@@ -1,4 +1,4 @@
-import runner
+from pythonwarrior import runner
 import sys
 
 
