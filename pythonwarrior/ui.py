@@ -23,7 +23,7 @@ class UI(object):
     @staticmethod
     def gets():
         if Config.in_stream:
-            return Config.in_stream.read()
+            return Config.in_stream.readline()
         else:
             return ''
 
