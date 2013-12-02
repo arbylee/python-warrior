@@ -57,7 +57,7 @@ class TestLevel(unittest.TestCase):
         with mock.patch.object(self.profile, 'tower_path', 'path/to/tower'):
             self.assertEqual(self.level.load_path(),
                              os.path.abspath(
-                                 'pythonwarrior/towers/tower/level_001.py'))
+                                 'towers/tower/level_001.py'))
 
     @mock.patch('pythonwarrior.level.os.path.exists')
     def test_should_exist_if_file_exists(self, mock_exists):

@@ -15,7 +15,7 @@ class TestGame(unittest.TestCase):
                                                           mock_mkdir):
         mock_ask.return_value = True
         self.game.make_game_directory()
-        mock_mkdir.assert_called_with('./rubywarrior')
+        mock_mkdir.assert_called_with('./pythonwarrior')
 
     @mock.patch('os.mkdir')
     @mock.patch('pythonwarrior.game.UI.ask')
@@ -92,12 +92,12 @@ class TestGame(unittest.TestCase):
     def test_should_find_tower_paths(self, mock_glob):
         self.game.tower_paths()
         mock_glob.glob.assert_called_with(
-            '/Users/Thoughtworker/code/python-warrior/pythonwarrior/towers/*')
+            '/Users/Thoughtworker/code/python-warrior/towers/*')
 
     def test_should_fetch_current_level_from_profile_and_cache_it(self):
         mock_level = mock.Mock(return_value='foo')
         mock_profile = mock.Mock(current_level=mock_level)
-        self.game.profile = mock_profile
+        self.game.profile = mock.Mock(return_value=mock_profile)
         self.game.current_level()
         self.game.current_level()
         mock_level.assert_called_once_with()
@@ -105,7 +105,7 @@ class TestGame(unittest.TestCase):
     def test_should_fetch_next_level_from_profile_and_cache_it(self):
         mock_level = mock.Mock(return_value='foo')
         mock_profile = mock.Mock(next_level=mock_level)
-        self.game.profile = mock_profile
+        self.game.profile = mock.Mock(return_value=mock_profile)
         self.game.next_level()
         self.game.next_level()
         mock_level.assert_called_once_with()
