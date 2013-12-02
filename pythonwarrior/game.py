@@ -109,8 +109,9 @@ class Game(object):
         return map(lambda path: Tower(path), self.tower_paths())
 
     def tower_paths(self):
-        return glob.glob(os.path.normpath(os.path.abspath(__file__) +
-                         '../../towers/*'))
+        tower_paths = glob.glob(os.path.normpath(os.path.abspath(__file__) +
+                                                 '../../../towers/*'))
+        return tower_paths
 
     def current_level(self):
         if not self._current_level:
