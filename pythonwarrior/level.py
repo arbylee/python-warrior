@@ -31,6 +31,7 @@ class Level(object):
         self.clue = None
         self.warrior = None
         self.description = None
+        self.tip = None
 
     def player_path(self):
         return self.profile.player_path
