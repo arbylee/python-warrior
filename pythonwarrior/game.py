@@ -18,19 +18,16 @@ class Game(object):
     def start(self):
         UI.puts('Welcome to Python Warrior')
         if os.path.exists(Config.path_prefix + '/.profile'):
-            self.profile = Profile.load(Config.path_prefix + '/.profile')
+            self._profile = Profile.load(Config.path_prefix + '/.profile')
         else:
-            if os.path.exists(Config.path_prefix + '/python-warrior'):
-                shutil.move(Config.path_prefix + '/python-warrior',
-                            Config.path_prefix + '/pythonwarrior')
-
-        if not os.path.exists(Config.path_prefix + '/pythonwarrior'):
-            self.make_game_directory()
+            if not os.path.exists(Config.path_prefix + '/pythonwarrior'):
+                self.make_game_directory()
+        self.play_normal_mode()
 
     def make_game_directory(self):
-        if UI.ask("No rubywarrior directory found, \
+        if UI.ask("No pythonwarrior directory found, \
                   would you like to create one?"):
-            os.mkdir(Config.path_prefix + '/rubywarrior')
+            os.mkdir(Config.path_prefix + '/pythonwarrior')
         else:
             UI.puts('Unable to continue without directory.')
             raise Exception("Unable to continue without directory.")
@@ -117,12 +114,12 @@ class Game(object):
 
     def current_level(self):
         if not self._current_level:
-            self._current_level = self.profile.current_level()
+            self._current_level = self.profile().current_level()
         return self._current_level
 
     def next_level(self):
         if not self._next_level:
-            self._next_level = self.profile.next_level()
+            self._next_level = self.profile().next_level()
         return self._next_level
 
     def choose_profile(self):
