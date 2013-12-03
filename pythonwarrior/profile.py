@@ -23,7 +23,7 @@ class Profile(object):
         return base64.b64encode(pickle.dumps(self))
 
     def save(self):
-        f = file.open(self.player_path + '/.profile', 'w')
+        f = open(self.player_path + '/.profile', 'w')
         f.write(self.encode())
 
     @staticmethod
@@ -32,7 +32,8 @@ class Profile(object):
 
     @staticmethod
     def load(path):
-        player = Profile.decode(file.read(path))
+        f = open(path)
+        player = Profile.decode(f.read())
         player._player_path = os.path.dirname(path)
         return player
 

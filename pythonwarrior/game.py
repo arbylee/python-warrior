@@ -87,6 +87,8 @@ class Game(object):
     def prepare_next_level(self):
         self.next_level().load_level()
         PlayerGenerator(self.next_level(), self.current_level()).generate()
+        self.profile().level_number += 1
+        self.profile().save()
 
     def profiles(self):
         return map(lambda profile: Profile.load(profile), self.profile_paths())
