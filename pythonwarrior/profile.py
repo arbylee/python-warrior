@@ -45,10 +45,10 @@ class Profile(object):
 
     def directory_name(self):
         return "-".join([re.sub("[^a-z0-9]", "-", self.warrior_name.lower()),
-                        self.tower().name])
+                        self.tower().name()])
 
     def __repr__(self):
-        return " - ".join([self.warrior_name, self.tower().name,
+        return " - ".join([self.warrior_name, self.tower().name(),
                            "level %s" % self.level_number,
                            "score %s" % self.score])
 

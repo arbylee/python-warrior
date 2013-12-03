@@ -90,7 +90,7 @@ class TestLevel(unittest.TestCase):
         self.profile.warrior_name = "Joe"
         warrior = mock.Mock()
         self.level.setup_warrior(warrior)
-        self.assertEqual(warrior.name, "Joe")
+        self.assertEqual(warrior.name_attr, "Joe")
 
 
 class TestPlaying(unittest.TestCase):

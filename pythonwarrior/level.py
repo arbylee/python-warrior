@@ -125,4 +125,4 @@ class Level(object):
     def setup_warrior(self, warrior):
         self.warrior = warrior
         self.warrior.add_abilities(*self.profile.abilities)
-        self.warrior.name = self.profile.warrior_name
+        self.warrior.name_attr = self.profile.warrior_name

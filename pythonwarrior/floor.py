@@ -1,5 +1,7 @@
 from pythonwarrior.position import Position
 from pythonwarrior.space import Space
+
+
 class Floor(object):
     def __init__(self):
         self.width = 0
@@ -19,7 +21,7 @@ class Floor(object):
 
     @property
     def units(self):
-        return filter(lambda unit: unit.position != None, self._units)
+        return filter(lambda unit: unit.position is not None, self._units)
 
     def other_units(self):
         return filter(lambda unit: unit.__class__.__name__ != 'Warrior', self._units)

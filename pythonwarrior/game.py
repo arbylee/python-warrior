@@ -41,7 +41,7 @@ class Game(object):
                 self.prepare_next_level()
                 UI.puts("First level has been generated."
                         "See the pythonwarrior/%s/README for instructions."
-                        % self.profile().directory_name)
+                        % self.profile().directory_name())
             else:
                 self.play_current_level()
 
