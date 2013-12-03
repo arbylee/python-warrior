@@ -47,7 +47,7 @@ class Level(object):
     def load_level(self):
         level = LevelLoader(self)
         f = open(self.load_path())
-        eval(f.read())
+        exec(f.read())
 
     def load_player(self):
         if self.player_path() not in sys.path:
