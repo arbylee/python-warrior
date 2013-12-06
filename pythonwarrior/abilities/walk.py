@@ -10,3 +10,6 @@ class Walk(AbilityBase):
                 self._unit.position.move(*self.offset(direction))
             else:
                 self._unit.say("bumps into %s" % self.space(direction))
+
+    def description(self):
+        return "Move in the given direction (forward by default)."

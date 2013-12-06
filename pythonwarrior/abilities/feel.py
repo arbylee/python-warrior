@@ -1,7 +1,7 @@
 from pythonwarrior.abilities.base import AbilityBase
 class Feel(AbilityBase):
     def description(self):
-        "Returns a Space for the given direction (forward by default)"
+        return "Returns a Space for the given direction (forward by default)"
 
     def perform(self, direction='forward'):
         if direction is None:
