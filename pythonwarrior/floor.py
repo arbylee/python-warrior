@@ -24,10 +24,10 @@ class Floor(object):
         return filter(lambda unit: unit.position is not None, self._units)
 
     def other_units(self):
-        return filter(lambda unit: unit.__class__.__name__ != 'Warrior', self._units)
+        return filter(lambda unit: unit.__class__.__name__ != 'Warrior', self.units)
 
     def get(self, x, y):
-        for unit in self._units:
+        for unit in self.units:
             if unit.position.at(x, y):
                 return unit
 
