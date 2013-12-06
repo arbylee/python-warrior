@@ -31,6 +31,9 @@ class UnitBase(object):
     def is_alive(self):
         return self.position is not None
 
+    def earn_points(self, points):
+        pass
+
     @property
     def health(self):
         if not self._health:
