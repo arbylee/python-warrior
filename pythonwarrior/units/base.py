@@ -4,6 +4,7 @@ from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.abilities.feel import Feel
 from pythonwarrior.abilities.walk import Walk
 from pythonwarrior.turn import Turn
+from pythonwarrior.ui import UI
 
 
 class UnitBase(object):
@@ -66,7 +67,8 @@ class UnitBase(object):
             self.abilities[ability] = eval("%s(self)" % re.sub("_$", "", ability).capitalize())
 
     def say(self, msg):
-        print msg
+        UI.puts_with_delay("%(name)s %(msg)s" % {'name': self.name(),
+                                                 'msg': msg})
 
     @property
     def character(self):
