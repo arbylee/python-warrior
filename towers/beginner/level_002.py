@@ -9,6 +9,6 @@ level.ace_score(26)
 level.size(8, 1)
 level.stairs(7, 0)
 def a_func(warrior):
-    warrior.add_abilities('walk')
+    warrior.add_abilities('feel', 'attack_')
 level.warrior(0, 0, 'east', func=a_func)
 level.unit('sludge', 4, 0, 'west')
