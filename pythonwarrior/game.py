@@ -1,6 +1,5 @@
 import glob
 import os
-import shutil
 
 from pythonwarrior.config import Config
 from pythonwarrior.player_generator import PlayerGenerator
