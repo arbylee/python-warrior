@@ -50,7 +50,7 @@ class Game(object):
         UI.puts("Starting level %d" % self.current_level().number)
         self.current_level().play()
         if self.current_level().is_passed():
-            if self.next_level():
+            if self.next_level().exists():
                 UI.puts("Success! You have found the stairs.")
             else:
                 UI.puts("CONGRATULATIONS! You have climbed to the top "
@@ -71,7 +71,7 @@ class Game(object):
 
     def request_next_level(self):
         if not Config.skip_input:
-            if self.next_level():
+            if self.next_level().exists():
                 if UI.ask('Would you like to continue on to the next level?'):
                     self.prepare_next_level()
                     UI.puts('See the updated README in the pythonwarrior/' +
