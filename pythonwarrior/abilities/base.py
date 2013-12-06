@@ -16,7 +16,7 @@ class AbilityBase(object):
     def space(self, direction, forward=1, right=0):
         return self._unit.position.relative_space(*self.offset(direction, forward, right))
 
-    def unit(self, direction, forward=1, right=2):
+    def unit(self, direction, forward=1, right=0):
         return self.space(direction, forward, right).unit
 
     def damage(self, receiver, amount):
