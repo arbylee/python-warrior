@@ -1,4 +1,6 @@
 from pythonwarrior.units.base import UnitBase
+
+
 class Sludge(UnitBase):
     def __init__(self):
         super(Sludge, self).__init__()
@@ -15,3 +17,9 @@ class Sludge(UnitBase):
     @property
     def character(self):
         return "s"
+
+    def play_turn(self, turn):
+        for direction in ['forward', 'left', 'right', 'backward']:
+            if turn.feel(direction).is_player():
+                turn.attack_(direction)
+                return
