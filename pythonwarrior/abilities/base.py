@@ -22,7 +22,7 @@ class AbilityBase(object):
     def damage(self, receiver, amount):
         receiver.take_damage(amount)
         if not receiver.is_alive():
-            self._unit.earn_points(receiver.max_health())
+            self._unit.earn_points(receiver.max_health)
 
     def description(self):
         return None
