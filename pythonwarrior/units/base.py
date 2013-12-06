@@ -42,9 +42,12 @@ class UnitBase(object):
             self.unbind()
         if self.health:
             self._health -= amount
+            self.say("takes %(amount)d damage, "
+                     "%(health)d health power left" %
+                     {'amount': amount, 'health': self.health})
             if self.health <= 0:
                 self.position = None
-                print "dies"
+                self.say("dies")
 
     def name(self):
         return self.__class__.__name__
