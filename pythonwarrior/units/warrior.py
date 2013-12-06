@@ -1,10 +1,15 @@
+import glob
+import sys
+
 from pythonwarrior.units.base import UnitBase
-from pythonwarrior.templates.player import Player
 from pythonwarrior.units.golem import Golem
+
+
 class Warrior(UnitBase):
 
-    def __init__(self):
+    def __init__(self, level=None):
         super(Warrior, self).__init__()
+        self.level = level
         self.player_attr = None
         self.name_attr = None
         self.score = 0
@@ -15,10 +20,15 @@ class Warrior(UnitBase):
         return self.player().play_turn(turn)
 
     def player(self):
+        if self.level.player_path() not in sys.path:
+            sys.path.insert(0, self.level.player_path())
+        if glob.glob(self.level.player_path() + '/player.py'):
+            import player
+
         if self.player_attr:
             return self.player_attr
         else:
-            self.player_attr = Player()
+            self.player_attr = player.Player()
             return self.player_attr
 
     def earn_points(self, points):

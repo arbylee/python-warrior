@@ -1,9 +1,11 @@
 import re
-from pythonwarrior.abilities.walk import Walk
 from pythonwarrior.abilities.attack import Attack
-from pythonwarrior.abilities.feel import Feel
 from pythonwarrior.abilities.explode import Explode
+from pythonwarrior.abilities.feel import Feel
+from pythonwarrior.abilities.walk import Walk
 from pythonwarrior.turn import Turn
+
+
 class UnitBase(object):
     def __init__(self):
         self.position = None
@@ -26,7 +28,7 @@ class UnitBase(object):
         return 0
 
     def is_alive(self):
-        return self.position != None
+        return self.position is not None
 
     @property
     def health(self):
@@ -72,9 +74,6 @@ class UnitBase(object):
 
     def bind(self):
         self.bound = True
-
-    def is_bound(self):
-        return self.bound
 
     def unbind(self):
         self.say("released from bonds")

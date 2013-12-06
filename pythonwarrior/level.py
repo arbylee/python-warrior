@@ -32,6 +32,7 @@ class Level(object):
         self.warrior = None
         self.description = None
         self.tip = None
+        self.floor = None
 
     def player_path(self):
         return self.profile.player_path
@@ -51,12 +52,10 @@ class Level(object):
 
     def load_player(self):
         if self.player_path() not in sys.path:
-            sys.path.append(self.player_path())
+            sys.path.insert(0, self.player_path())
         if glob.glob(self.player_path() + '/player.py'):
             if 'player' not in sys.modules:
                 import player
-            else:
-                reload(player)
 
     def generate_player_files(self):
         self.load_level()

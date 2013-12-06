@@ -49,6 +49,7 @@ class Game(object):
         continue_play = True
         self.current_level().load_player()
         UI.puts("Starting level %d" % self.current_level().number)
+        self.current_level().play()
         if self.current_level().is_passed():
             if self.next_level():
                 UI.puts("Success! You have found the stairs.")
@@ -56,14 +57,14 @@ class Game(object):
                 UI.puts("CONGRATULATIONS! You have climbed to the top "
                         "of the tower and rescued the fair maiden Python")
                 continue_play = False
-            self.current_level.tally_points()
+            self.current_level().tally_points()
             self.request_next_level()
         else:
             continue_play = False
             UI.puts("Sorry, you failed level %d. "
                     "Change your script and try again." %
-                    self.current_level.number)
-            if (not Config.skip_input) and self.current_level.clue \
+                    self.current_level().number)
+            if (not Config.skip_input) and self.current_level().clue \
                     and UI.ask("Would you like to read the "
                                "additional clues for this level?"):
                         UI.puts(self.current_level().clue.hard_wrap)

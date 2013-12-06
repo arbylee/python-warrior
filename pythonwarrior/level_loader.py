@@ -42,7 +42,7 @@ class LevelLoader(object):
 
     def warrior(self, *args, **kwargs):
         a_func = kwargs.get('func', None)
-        return self.level.setup_warrior(self.unit(Warrior(), *args, func=a_func))
+        return self.level.setup_warrior(self.unit(Warrior(self.level), *args, func=a_func))
 
     @staticmethod
     def _unit_to_constant(name):

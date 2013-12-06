@@ -1,4 +1,6 @@
 from pythonwarrior.abilities.base import AbilityBase
+
+
 class Walk(AbilityBase):
     def perform(self, direction="forward"):
         self.verify_direction(direction)
@@ -8,5 +10,3 @@ class Walk(AbilityBase):
                 self._unit.position.move(*self.offset(direction))
             else:
                 self._unit.say("bumps into %s" % self.space(direction))
-
-

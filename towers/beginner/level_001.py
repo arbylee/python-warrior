@@ -11,4 +11,4 @@ level.size(8, 1)
 level.stairs(7, 0)
 def a_func(warrior):
     warrior.add_abilities('walk')
-level.warrior(0, 0, func=a_func)
+level.warrior(0, 0, 'east', func=a_func)
