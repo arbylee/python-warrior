@@ -1,6 +1,12 @@
 from pythonwarrior.floor import Floor
-from pythonwarrior.units.warrior import Warrior
+
+# These are used dynamically via unit_to_constant
+from pythonwarrior.units.captive import Captive
+from pythonwarrior.units.golem import Golem
+from pythonwarrior.units.sludge import Sludge
+
 from pythonwarrior.units.base import UnitBase
+from pythonwarrior.units.warrior import Warrior
 
 
 class LevelLoader(object):
@@ -42,7 +48,8 @@ class LevelLoader(object):
 
     def warrior(self, *args, **kwargs):
         a_func = kwargs.get('func', None)
-        return self.level.setup_warrior(self.unit(Warrior(self.level), *args, func=a_func))
+        warrior = Warrior(self.level)
+        return self.level.setup_warrior(self.unit(warrior, *args, func=a_func))
 
     @staticmethod
     def _unit_to_constant(name):
