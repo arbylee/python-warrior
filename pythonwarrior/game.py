@@ -66,7 +66,7 @@ class Game(object):
             if (not Config.skip_input) and self.current_level().clue \
                     and UI.ask("Would you like to read the "
                                "additional clues for this level?"):
-                        UI.puts(self.current_level().clue.hard_wrap)
+                        UI.puts(self.current_level().clue)
         return continue_play
 
     def request_next_level(self):
