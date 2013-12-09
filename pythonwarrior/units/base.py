@@ -2,6 +2,7 @@ import re
 from pythonwarrior.abilities.attack import Attack
 from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.abilities.feel import Feel
+from pythonwarrior.abilities.rest import Rest
 from pythonwarrior.abilities.walk import Walk
 from pythonwarrior.turn import Turn
 from pythonwarrior.ui import UI
@@ -39,6 +40,10 @@ class UnitBase(object):
         if not self._health:
             self._health = self.max_health
         return self._health
+
+    @health.setter
+    def health(self, value):
+        self._health = value
 
     def take_damage(self, amount):
         if self.is_bound():
