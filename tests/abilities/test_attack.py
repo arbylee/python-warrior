@@ -1,11 +1,15 @@
 import mock
 import unittest
+
 from pythonwarrior.abilities.attack import Attack
 from pythonwarrior.units.base import UnitBase
 
+
 class TestAttack(unittest.TestCase):
     def setUp(self):
-        self.attacker = mock.Mock(position=mock.Mock(), attack_power=3, say=lambda x: x)
+        self.attacker = mock.Mock(position=mock.Mock(),
+                                  attack_power=3,
+                                  say=lambda x: x)
         self.attack = Attack(self.attacker)
 
     @mock.patch('pythonwarrior.abilities.attack.Attack.unit')
