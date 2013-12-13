@@ -3,7 +3,7 @@
 #  --------
 
 level.description("It is too dark to see anything, but you smell sludge nearby.")
-level.tip("Use warrior.feel.empty? to see if there is anything in front of you, and warrior.attack! to fight it. Remember, you can only do one action (ending in !) per turn.")
+level.tip("Use warrior.feel().is_empty to see if there is anything in front of you, and warrior.attack! to fight it. Remember, you can only do one action (ending in _) per turn.")
 level.time_bonus(20)
 level.ace_score(26)
 level.size(8, 1)

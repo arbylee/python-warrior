@@ -3,7 +3,7 @@
 #  -------
 
 level.description("You hear cries for help. Captives must need rescuing.")
-level.tip("Use warrior.feel.captive? to see if there is a captive and warrior.rescue! to rescue him. Don't attack captives.")
+level.tip("Use warrior.feel().is_captive() to see if there is a captive and warrior.rescue_() to rescue him. Don't attack captives.")
 level.clue("Don't forget to constantly check if you're taking damage. Rest until your health is full if you aren't taking damage.")
 
 level.time_bonus(45)

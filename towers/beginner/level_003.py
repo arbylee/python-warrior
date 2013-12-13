@@ -4,7 +4,7 @@
 
 level.description("The air feels thicker than before. There must be a horde of sludge.")
 level.tip("Be careful not to die! Use warrior.health to keep an eye on your health, and warrior.rest! to earn 10% of max health back.")
-level.clue("When there is no enemy ahead of you call warrior.rest! until health is full before walking forward.")
+level.clue("When there is no enemy ahead of you call warrior.rest_() until health is full before walking forward.")
 level.time_bonus(35)
 level.ace_score(71)
 level.size(9, 1)
