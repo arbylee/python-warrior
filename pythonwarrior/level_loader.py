@@ -4,6 +4,7 @@ from pythonwarrior.floor import Floor
 from pythonwarrior.units.captive import Captive
 from pythonwarrior.units.golem import Golem
 from pythonwarrior.units.sludge import Sludge
+from pythonwarrior.units.thick_sludge import ThickSludge
 
 from pythonwarrior.units.base import UnitBase
 from pythonwarrior.units.warrior import Warrior
