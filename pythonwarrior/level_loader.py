@@ -1,6 +1,7 @@
 from pythonwarrior.floor import Floor
 
 # These are used dynamically via unit_to_constant
+from pythonwarrior.units.archer import Archer
 from pythonwarrior.units.captive import Captive
 from pythonwarrior.units.golem import Golem
 from pythonwarrior.units.sludge import Sludge
