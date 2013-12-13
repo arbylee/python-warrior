@@ -5,6 +5,7 @@ from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.abilities.feel import Feel
 from pythonwarrior.abilities.health import Health
 from pythonwarrior.abilities.look import Look
+from pythonwarrior.abilities.rescue import Rescue
 from pythonwarrior.abilities.rest import Rest
 from pythonwarrior.abilities.shoot import Shoot
 from pythonwarrior.abilities.walk import Walk
