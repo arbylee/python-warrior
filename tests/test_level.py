@@ -66,11 +66,6 @@ class TestLevel(unittest.TestCase):
         self.assertTrue(self.level.exists())
         mock_exists.assert_called_once_with('/foo/bar')
 
-    @mock.patch('__builtin__.reload')
-    def test_should_load_player_and_player_path(self, mock_reload):
-        self.level.player_path = mock.Mock(return_value='/player/path')
-        self.level.load_player()
-
     @mock.patch('pythonwarrior.level.PlayerGenerator')
     def test_should_generate_player_files(self, mock_pg):
         generator = mock.Mock()

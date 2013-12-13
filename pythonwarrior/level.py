@@ -50,13 +50,6 @@ class Level(object):
         f = open(self.load_path())
         exec(f.read())
 
-    def load_player(self):
-        if self.player_path() not in sys.path:
-            sys.path.insert(0, self.player_path())
-        if glob.glob(self.player_path() + '/player.py'):
-            if 'player' not in sys.modules:
-                import player
-
     def generate_player_files(self):
         self.load_level()
         PlayerGenerator(self, Level(self.profile, self.number-1)).generate()

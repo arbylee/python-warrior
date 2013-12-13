@@ -46,7 +46,6 @@ class Game(object):
 
     def play_current_level(self):
         continue_play = True
-        self.current_level().load_player()
         UI.puts("Starting level %d" % self.current_level().number)
         self.current_level().play()
         if self.current_level().is_passed():
