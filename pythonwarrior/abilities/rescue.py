@@ -1,5 +1,5 @@
 from pythonwarrior.abilities.base import AbilityBase
-from pythonwarrior.units.captive import Captive
+from pythonwarrior import units
 
 
 class Rescue(AbilityBase):
@@ -14,7 +14,7 @@ class Rescue(AbilityBase):
             self._unit.say("unbinds %(direction)s and rescues %(recipient)s" %
                            {'direction': direction, 'recipient': recipient})
             recipient.unbind()
-            if isinstance(recipient, Captive):
+            if isinstance(recipient, units.captive.Captive):
                 recipient.position = None
                 self._unit.earn_points(20)
         else:
