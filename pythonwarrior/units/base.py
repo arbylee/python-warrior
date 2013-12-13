@@ -80,7 +80,8 @@ class UnitBase(object):
 
     def add_abilities(self, *new_abilities):
         for ability in new_abilities:
-            self.abilities[ability] = eval("%s(self)" % re.sub("_$", "", ability).capitalize())
+            class_name = re.sub("_$", "", ability).capitalize()
+            self.abilities[ability] = eval("%s(self)" % class_name)
 
     def say(self, msg):
         UI.puts_with_delay("%(name)s %(msg)s" % {'name': self.name(),

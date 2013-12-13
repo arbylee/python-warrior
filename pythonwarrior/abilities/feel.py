@@ -1,4 +1,6 @@
 from pythonwarrior.abilities.base import AbilityBase
+
+
 class Feel(AbilityBase):
     def description(self):
         return "Returns a Space for the given direction (forward by default)"
@@ -8,4 +10,3 @@ class Feel(AbilityBase):
             direction = 'forward'
         self.verify_direction(direction)
         return self.space(direction)
-

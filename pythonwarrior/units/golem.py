@@ -1,5 +1,6 @@
 from pythonwarrior.units.base import UnitBase
 
+
 class Golem(UnitBase):
     def __init__(self):
         super(Golem, self).__init__()
@@ -17,4 +18,3 @@ class Golem(UnitBase):
     @property
     def attack_power(self):
         return 3
-

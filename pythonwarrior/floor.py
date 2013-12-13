@@ -24,7 +24,8 @@ class Floor(object):
         return filter(lambda unit: unit.position is not None, self._units)
 
     def other_units(self):
-        return filter(lambda unit: unit.__class__.__name__ != 'Warrior', self.units)
+        return filter(lambda unit: unit.__class__.__name__ != 'Warrior',
+                      self.units)
 
     def get(self, x, y):
         for unit in self.units:
@@ -54,7 +55,8 @@ class Floor(object):
     def unique_units(self):
         uniq_units = []
         for unit in self.units:
-            uniq_classes = map(lambda unit: unit.__class__.__name__, uniq_units)
+            uniq_classes = map(lambda unit: unit.__class__.__name__,
+                               uniq_units)
             uniq_classes = list(set(uniq_classes))
             if not unit.__class__.__name__ in uniq_classes:
                 uniq_units.append(unit)

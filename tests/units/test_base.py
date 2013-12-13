@@ -2,6 +2,7 @@ import unittest
 import mock
 from pythonwarrior.units.base import UnitBase
 
+
 class TestUnitBase(unittest.TestCase):
     def setUp(self):
         self.unit = UnitBase()
@@ -40,14 +41,16 @@ class TestUnitBase(unittest.TestCase):
 
     @mock.patch('pythonwarrior.units.base.UnitBase.next_turn')
     @mock.patch('pythonwarrior.units.base.UnitBase.play_turn')
-    def test_should_prepare_turn_by_calling_play_turn_with_next_turn_object(self, mock_play_turn, mock_next_turn):
+    def test_should_prepare_turn_by_calling_play_turn_with_next_turn_object(
+            self, mock_play_turn, mock_next_turn):
         mock_next_turn.return_value = "next_turn"
         self.unit.prepare_turn()
         mock_play_turn.assert_called_with('next_turn')
 
     @mock.patch('pythonwarrior.units.base.UnitBase.next_turn')
     @mock.patch('pythonwarrior.units.base.Walk')
-    def test_should_perform_action_when_calling_perform_on_turn(self, mock_walk, mock_next_turn):
+    def test_should_perform_action_when_calling_perform_on_turn(
+            self, mock_walk, mock_next_turn):
         self.unit.position = mock.Mock()
 
         walk_object = mock.Mock(name='asdfs')
@@ -84,7 +87,8 @@ class TestUnitBase(unittest.TestCase):
 
     @mock.patch('pythonwarrior.units.base.UnitBase.abilities')
     @mock.patch('pythonwarrior.units.base.Turn')
-    def test_should_pass_abilities_to_new_turn_when_calling_next_turn(self, mock_turn, mock_abilities):
+    def test_should_pass_abilities_to_new_turn_when_calling_next_turn(
+            self, mock_turn, mock_abilities):
         mock_turn.return_value = 'turn'
         self.assertEqual(self.unit.next_turn(), 'turn')
         mock_turn.assert_called_once_with(mock_abilities)

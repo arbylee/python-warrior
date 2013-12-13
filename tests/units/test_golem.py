@@ -1,6 +1,8 @@
 import mock
 import unittest
+
 from pythonwarrior.units.golem import Golem
+
 
 class TestGolem(unittest.TestCase):
     def setUp(self):
