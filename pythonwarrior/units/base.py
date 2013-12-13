@@ -1,7 +1,9 @@
 import re
+
 from pythonwarrior.abilities.attack import Attack
 from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.abilities.feel import Feel
+from pythonwarrior.abilities.health import Health
 from pythonwarrior.abilities.rest import Rest
 from pythonwarrior.abilities.walk import Walk
 from pythonwarrior.turn import Turn

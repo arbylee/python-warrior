@@ -10,6 +10,7 @@ level.ace_score(71)
 level.size(9, 1)
 level.stairs(8, 0)
 def a_func(warrior):
+    warrior.add_abilities('health')
     warrior.add_abilities('rest_')
 level.warrior(0, 0, 'east', func=a_func)
 
