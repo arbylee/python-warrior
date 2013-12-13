@@ -41,7 +41,7 @@ class UnitBase(object):
 
     @property
     def health(self):
-        if not self._health:
+        if self._health is None:
             self._health = self.max_health
         return self._health
 
