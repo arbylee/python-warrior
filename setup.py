@@ -10,7 +10,7 @@ setup(
     author_email="rblee88@gmail.com",
     description=("Game written in Python for learning Python and AI - "
                  "a Python port of ruby-warrior"),
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
     install_requires=['jinja2'],
     license="MIT",
     url="https://github.com/arbylee/python-warrior",
