@@ -10,6 +10,14 @@ This is a game designed to teach the Python language and artificial intelligence
 
 You play as a warrior climbing a tall tower to reach the precious Python at the top level. On each floor you need to write a Python script to instruct the warrior to battle enemies, rescue captives, and reach the stairs. You have some idea of what each floor contains, but you never know for certain what will happen. You must give the Warrior enough artificial intelligence up-front to find his own way.
 
+Versions
+========
+
+0.0.2
+-----
+
+Fix towers not being found on first play
+
 
 Getting Started
 ===============
