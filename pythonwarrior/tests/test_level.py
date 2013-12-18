@@ -1,8 +1,6 @@
 import mock
 import os
-import sys
 import unittest
-import pythonwarrior
 
 from pythonwarrior.floor import Floor
 from pythonwarrior.level import Level
