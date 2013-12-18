@@ -2,7 +2,7 @@
 Python Warrior
 ==============
 
-This is Python port of ryanb's `Ruby Warrior`_.
+This is a Python port of ryanb's `Ruby Warrior`_.
 
 .. _Ruby Warrior: https://github.com/ryanb/ruby-warrior
 
