@@ -1,5 +1,7 @@
 import mock
+import os
 import unittest
+
 from pythonwarrior.game import Game
 from pythonwarrior.profile import Profile
 
@@ -88,11 +90,13 @@ class TestGame(unittest.TestCase):
                                                         'towers/bar'])
         self.assertEqual(self.game.towers(), [1, 2])
 
+    @mock.patch.object(os.path, 'abspath')
     @mock.patch('pythonwarrior.game.glob')
-    def test_should_find_tower_paths(self, mock_glob):
+    def test_should_find_tower_paths(self, mock_glob, mock_abspath):
+        mock_abspath.return_value = 'foo/foo.py'
         self.game.tower_paths()
         mock_glob.glob.assert_called_with(
-            '/Users/Thoughtworker/code/python-warrior/towers/*')
+            'foo/towers/*')
 
     def test_should_fetch_current_level_from_profile_and_cache_it(self):
         mock_level = mock.Mock(return_value='foo')

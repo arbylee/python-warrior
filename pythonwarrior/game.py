@@ -111,7 +111,7 @@ class Game(object):
 
     def tower_paths(self):
         tower_paths = glob.glob(os.path.normpath(os.path.abspath(__file__) +
-                                                 '../../../towers/*'))
+                                                 '/../towers/*'))
         return tower_paths
 
     def current_level(self):
