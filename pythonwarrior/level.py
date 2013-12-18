@@ -39,7 +39,7 @@ class Level(object):
 
     def load_path(self):
         return os.path.join(
-            os.path.normpath(os.path.abspath(__file__) + '../../../towers'),
+            os.path.normpath(os.path.abspath(__file__) + '../../towers'),
             os.path.basename(self.profile.tower_path) +
             '/level_' + str(self.number).rjust(3, '0') +
             '.py'
