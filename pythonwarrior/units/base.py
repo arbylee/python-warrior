@@ -1,6 +1,7 @@
 import re
 
 from pythonwarrior.abilities.attack import Attack
+from pythonwarrior.abilities.direction_of_stairs import DirectionOfStairs
 from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.abilities.feel import Feel
 from pythonwarrior.abilities.health import Health
