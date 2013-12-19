@@ -13,6 +13,12 @@ You play as a warrior climbing a tall tower to reach the precious Python at the 
 Versions
 ========
 
+0.0.4
+=====
+
+Fix bug with finding the instructions README
+Fix bug with towers path finding init files
+
 0.0.3
 -----
 
