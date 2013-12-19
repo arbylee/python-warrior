@@ -14,20 +14,20 @@ Versions
 ========
 
 0.0.4
-=====
+-----
 
-Fix bug with finding the instructions README
-Fix bug with towers path finding init files
+* Fix bug with finding the instructions README
+* Fix bug with towers path finding init files
 
 0.0.3
 -----
 
-Fix bug with towers folder not being packaged
+* Fix bug with towers folder not being packaged
 
 0.0.2
 -----
 
-Fix towers not being found on first play
+* Fix towers not being found on first play
 
 
 Getting Started
