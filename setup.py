@@ -5,6 +5,7 @@ setup(
     name='pythonwarrior',
     version='0.0.3',
     packages=find_packages(),
+    package_data={'pythonwarrior': ['templates/README']},
     scripts=['bin/pythonwarrior'],
     author="Richard Lee",
     author_email="rblee88@gmail.com",
