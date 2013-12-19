@@ -30,4 +30,4 @@ Golem Abilities:
 {% endif %}
 
 
-When you're done editing player.py, run `python python-warrior/main.py` again.
+When you're done editing player.py, run `pythonwarrior` again.
