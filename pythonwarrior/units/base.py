@@ -6,6 +6,7 @@ from pythonwarrior.abilities.direction_of_stairs import DirectionOfStairs
 from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.abilities.feel import Feel
 from pythonwarrior.abilities.health import Health
+from pythonwarrior.abilities.listen import Listen
 from pythonwarrior.abilities.look import Look
 from pythonwarrior.abilities.pivot import Pivot
 from pythonwarrior.abilities.rescue import Rescue
