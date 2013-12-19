@@ -10,26 +10,6 @@ This is a game designed to teach the Python language and artificial intelligence
 
 You play as a warrior climbing a tall tower to reach the precious Python at the top level. On each floor you need to write a Python script to instruct the warrior to battle enemies, rescue captives, and reach the stairs. You have some idea of what each floor contains, but you never know for certain what will happen. You must give the Warrior enough artificial intelligence up-front to find his own way.
 
-Versions
-========
-
-0.0.4
------
-
-* Fix bug with finding the instructions README
-* Fix bug with towers path finding init files
-
-0.0.3
------
-
-* Fix bug with towers folder not being packaged
-
-0.0.2
------
-
-* Fix towers not being found on first play
-
-
 Getting Started
 ===============
 
@@ -228,3 +208,23 @@ Running "pythonwarrior" while you are in your profile directory will auto-select
 If you're aiming for points, remember to sweep the area. Even if you're close to the stairs, don't go in until you've gotten everything (if you have the health). Use far-ranged senses (such as look and listen) to determine if there are any enemies left.
 
 Make sure to try the different options you can pass to the pythonwarrior command. Run "pythonwarrior --help" to see them all.
+
+Versions
+========
+
+0.0.4
+-----
+
+* Fix bug with finding the instructions README
+* Fix bug with towers path finding init files
+
+0.0.3
+-----
+
+* Fix bug with towers folder not being packaged
+
+0.0.2
+-----
+
+* Fix towers not being found on first play
+
