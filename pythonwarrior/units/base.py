@@ -2,6 +2,7 @@ import re
 
 from pythonwarrior.abilities.attack import Attack
 from pythonwarrior.abilities.bind import Bind
+from pythonwarrior.abilities.direction_of import DirectionOf
 from pythonwarrior.abilities.direction_of_stairs import DirectionOfStairs
 from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.abilities.feel import Feel
