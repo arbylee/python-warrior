@@ -212,6 +212,11 @@ Make sure to try the different options you can pass to the pythonwarrior command
 Versions
 ========
 
+0.0.5
+-----
+
+* Add intermediate towers
+
 0.0.4
 -----
 
