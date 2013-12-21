@@ -3,7 +3,7 @@
 #  --------
 level.description("You see before yourself a long hallway with stairs at "
                   "the end. There is nothing in the way.")
-level.tip("Call warrior.walk_ to walk forward in the Player "
+level.tip("Call warrior.walk_() to walk forward in the Player "
           "'play_turn' method.")
 level.time_bonus(15)
 level.ace_score(10)
