@@ -3,7 +3,7 @@
 #  --------
 
 level.description("The wall behind you feels a bit further away in this room. And you hear more cries for help.")
-level.tip("You can walk backward by passing 'backward' as an argument to walk_. Same goes for feel, rescue_ and attack_. Archers have a limited attack distance.")
+level.tip("You can walk backward by passing 'backward' as an argument to warrior.walk_. Same goes for warrior.feel, warrior.rescue_ and warrior.attack_. Archers have a limited attack distance.")
 level.clue("Walk backward if you are taking damage from afar and do not have enough health to attack. You may also want to consider walking backward until warrior.feel('backward').is_wall().")
 
 level.time_bonus(55)
