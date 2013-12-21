@@ -5,6 +5,7 @@ from pythonwarrior.abilities.bind import Bind
 from pythonwarrior.abilities.detonate import Detonate
 from pythonwarrior.abilities.direction_of import DirectionOf
 from pythonwarrior.abilities.direction_of_stairs import DirectionOfStairs
+from pythonwarrior.abilities.distance_of import DistanceOf
 from pythonwarrior.abilities.explode import Explode
 from pythonwarrior.abilities.feel import Feel
 from pythonwarrior.abilities.health import Health
