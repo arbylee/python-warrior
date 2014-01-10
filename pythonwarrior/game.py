@@ -79,9 +79,13 @@ class Game(object):
                 else:
                     UI.puts('Staying on current level.'
                             'Try to earn more points next time.')
+
             else:
-                UI.ask('Would you like to continue on to epic mode?')
-                UI.puts('Sorry, epic mode is not yet enabled!')
+                if UI.ask('Would you like to continue on to epic mode?'):
+                    UI.puts('Sorry, epic mode is not yet enabled!')
+                else:
+                    UI.puts("Staying on current level. "
+                            "Try to earn more points next time.")
 
     def prepare_next_level(self):
         self.next_level().load_level()
