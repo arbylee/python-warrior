@@ -13,7 +13,7 @@ class Runner(object):
     def run(self):
         Config.in_stream = self.stdin
         Config.out_stream = self.stdout
-        Config.delay = 0.6
+        Config.delay = 0.2
         self.parse_options()
         self.game.start()
 

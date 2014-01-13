@@ -12,7 +12,8 @@ class PlayerGenerator(object):
         if self.level.number == 1:
             if not os.path.exists(self.level.player_path()):
                 os.makedirs(self.level.player_path())
-            shutil.copy(self.templates_path() + '/player.py', self.level.player_path() + '/player.py')
+            shutil.copy(self.templates_path() +
+                        '/player.py', self.level.player_path() + '/player.py')
 
         env = Environment(loader=PackageLoader('pythonwarrior', 'templates'))
         readme_template = env.get_template('README')

@@ -1,4 +1,6 @@
 import functools
+
+
 class Turn(object):
     def __init__(self, abilities):
         self.action = None

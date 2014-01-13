@@ -3,6 +3,7 @@ from pythonwarrior.units.base import UnitBase
 from pythonwarrior.units.warrior import Warrior
 from pythonwarrior.floor import Floor
 
+
 class TestFloorTwoByThree(unittest.TestCase):
     def setUp(self):
         self.floor = Floor()
@@ -29,23 +30,24 @@ class TestFloorTwoByThree(unittest.TestCase):
         self.assertIn(unit, self.floor.other_units())
 
     def test_should_not_consider_corner_out_of_bounds(self):
-        self.assertFalse(self.floor.out_of_bounds(0,0))
-        self.assertFalse(self.floor.out_of_bounds(1,0))
-        self.assertFalse(self.floor.out_of_bounds(1,2))
-        self.assertFalse(self.floor.out_of_bounds(0,2))
+        self.assertFalse(self.floor.out_of_bounds(0, 0))
+        self.assertFalse(self.floor.out_of_bounds(1, 0))
+        self.assertFalse(self.floor.out_of_bounds(1, 2))
+        self.assertFalse(self.floor.out_of_bounds(0, 2))
 
     def test_should_consider_corner_out_of_bounds_when_beyond_sides(self):
-        self.assertTrue(self.floor.out_of_bounds(-1,0))
-        self.assertTrue(self.floor.out_of_bounds(0,-1))
-        self.assertTrue(self.floor.out_of_bounds(0,3))
-        self.assertTrue(self.floor.out_of_bounds(2,0))
+        self.assertTrue(self.floor.out_of_bounds(-1, 0))
+        self.assertTrue(self.floor.out_of_bounds(0, -1))
+        self.assertTrue(self.floor.out_of_bounds(0, 3))
+        self.assertTrue(self.floor.out_of_bounds(2, 0))
 
     def test_should_return_space_at_specified_location(self):
-        self.assertEqual(self.floor.space(0,0).__class__.__name__, 'Space')
+        self.assertEqual(self.floor.space(0, 0).__class__.__name__, 'Space')
 
     def test_should_place_stairs_and_be_able_to_fetch_the_location(self):
         self.floor.place_stairs(1, 2)
         self.assertEqual(self.floor.stairs_location, [1, 2])
+
 
 class TestFloorThreeByOne(unittest.TestCase):
     def setUp(self):

@@ -3,7 +3,6 @@ import mock
 import pickle
 import unittest
 from pythonwarrior.profile import Profile
-from pythonwarrior.tower import Tower
 
 
 class TestProfile(unittest.TestCase):
@@ -84,6 +83,7 @@ class TestProfile(unittest.TestCase):
         self.profile.current_epic_grades = {}
         self.assertIsNone(self.profile.calculate_average_grade())
 
+
 class TestProfileWithTowerPath(unittest.TestCase):
     def setUp(self):
         self.profile = Profile()
@@ -92,19 +92,22 @@ class TestProfileWithTowerPath(unittest.TestCase):
 
     def test_save_should_write_file_with_encoded_profile(self):
         with mock.patch('__builtin__.open') as mock_open:
-            with mock.patch.object(self.profile, 'encode', return_value='encoded_profile'):
+            with mock.patch.object(self.profile, 'encode',
+                                   return_value='encoded_profile'):
                 f = mock.Mock()
                 mock_open.return_value = f
                 self.profile.save()
                 f.write.assert_called_once_with('encoded_profile')
                 mock_open.assert_called_once_with(self.profile._player_path +
                                                   '/.profile', 'w')
+
     def test_should_have_a_nice_string_representation(self):
         self.profile.warrior_name = "Joe"
         self.assertEqual(str(self.profile), "Joe - tower - level 0 - score 0")
 
     def test_should_guess_at_the_player_path(self):
-        self.assertEqual(self.profile.player_path, './pythonwarrior/john-smith-tower')
+        self.assertEqual(self.profile.player_path,
+                         './pythonwarrior/john-smith-tower')
 
     def test_should_use_specified_player_path(self):
         self.profile._player_path = "path/to/player"

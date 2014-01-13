@@ -81,7 +81,7 @@ class TestUnitBase(unittest.TestCase):
         self.unit.prepare_turn()
         self.unit.perform_turn()
 
-    def test_should_not_raise_an_exception_when_calling_perform_turn_with_no_action(self):
+    def test_should_not_raise_exception_when_perform_turn_with_no_action(self):
         self.unit.prepare_turn()
         self.unit.perform_turn()
 

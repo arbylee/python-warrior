@@ -1,4 +1,6 @@
 from pythonwarrior.position import Position
+
+
 class AbilityBase(object):
     def __init__(self, unit):
         self._unit = unit
@@ -14,7 +16,8 @@ class AbilityBase(object):
             return [-right, -forward]
 
     def space(self, direction, forward=1, right=0):
-        return self._unit.position.relative_space(*self.offset(direction, forward, right))
+        offset = self.offset(direction, forward, right)
+        return self._unit.position.relative_space(*offset)
 
     def unit(self, direction, forward=1, right=0):
         return self.space(direction, forward, right).unit
@@ -32,4 +35,6 @@ class AbilityBase(object):
 
     def verify_direction(self, direction):
         if direction not in Position.RELATIVE_DIRECTIONS:
-            raise Exception("Unknown direction %s. Should be 'forward', 'backward', 'left' or 'right'")
+            raise Exception("Unknown direction %s. "
+                            "Should be 'forward', 'backward', "
+                            "'left' or 'right'")
