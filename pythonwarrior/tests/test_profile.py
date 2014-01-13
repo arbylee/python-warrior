@@ -53,21 +53,36 @@ class TestProfile(unittest.TestCase):
         self.profile.level_number = 1
         self.assertEqual(self.profile.next_level().number, 2)
 
-    @unittest.skip
     def test_should_enable_epic_mode_and_reset_scores_if_none(self):
-        self.assertTrue(False)
+        self.profile.enable_epic_mode()
+        self.assertTrue(self.profile.epic)
+        self.assertEqual(0, self.profile.epic_score)
+        self.assertEqual(0, self.profile.current_epic_score)
 
-    @unittest.skip
     def test_should_override_epic_score_with_current_one_if_it_is_higher(self):
-        self.assertTrue(False)
+        self.profile.enable_epic_mode()
+        self.assertEqual(0, self.profile.epic_score)
+        self.assertEqual(None, self.profile.average_grade)
+        self.profile.current_epic_score = 123
+        self.profile.current_epic_grades = {1: 0.7, 2: 0.9}
+        self.profile.update_epic_score()
+        self.assertEqual(123, self.profile.epic_score)
+        self.assertEqual(0.8, self.profile.average_grade)
 
-    @unittest.skip
-    def test_should_not_override_epic_score_with_current_one_if_it_is_lower(self):
-        self.assertTrue(False)
+    def test_should_not_override_epic_score_with_current_one_if_lower(self):
+        self.profile.enable_epic_mode()
+        self.profile.epic_score = 124
+        self.profile.average_grade = 0.9
+        self.profile.current_epic_score = 123
+        self.profile.current_epic_grades = {1: 0.7, 2: 0.9}
+        self.profile.update_epic_score()
+        self.assertEqual(124, self.profile.epic_score)
+        self.assertEqual(0.9, self.profile.average_grade)
 
-    @unittest.skip
     def test_should_not_calculate_average_grade_if_no_grades_are_present(self):
-        self.assertTrue(False)
+        self.profile.enable_epic_mode()
+        self.profile.current_epic_grades = {}
+        self.assertIsNone(self.profile.calculate_average_grade())
 
 class TestProfileWithTowerPath(unittest.TestCase):
     def setUp(self):

@@ -83,8 +83,16 @@ class Level(object):
             UI.puts('Clear Bonus: %d' % self.clear_bonus())
             score += self.clear_bonus()
 
-        if False:  # self.profile.is_epic():
-            pass
+        if self.profile.epic:
+            if self.grade_for(score):
+                UI.puts('Level Grade: %s' % self.grade_for(score))
+            UI.puts('Total Score: %s' %
+                    self.score_calculation(self.profile.current_epic_score,
+                                           score))
+            if self.ace_score:
+                grade = (score / float(self.ace_score))
+                self.profile.current_epic_grades[self.number] = grade
+            self.profile.current_epic_score += score
         else:
             UI.puts('Total Score: %s' %
                     self.score_calculation(self.profile.score, score))

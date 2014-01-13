@@ -2,6 +2,7 @@ import glob
 import os
 
 from pythonwarrior.config import Config
+from pythonwarrior.level import Level
 from pythonwarrior.player_generator import PlayerGenerator
 from pythonwarrior.profile import Profile
 from pythonwarrior.tower import Tower
@@ -21,7 +22,14 @@ class Game(object):
         else:
             if not os.path.exists(Config.path_prefix + '/pythonwarrior'):
                 self.make_game_directory()
-        self.play_normal_mode()
+
+        if self.profile().epic:
+            if self.profile().level_after_epic():
+                self.go_back_to_normal_mode()
+            else:
+                self.play_epic_mode()
+        else:
+            self.play_normal_mode()
 
     def make_game_directory(self):
         if UI.ask("No pythonwarrior directory found, \
@@ -30,6 +38,24 @@ class Game(object):
         else:
             UI.puts('Unable to continue without directory.')
             raise Exception("Unable to continue without directory.")
+
+    def play_epic_mode(self):
+        if Config.delay:
+            Config.delay = Config.delay/2
+
+        self.profile().current_epic_score = 0
+        self.profile().current_epic_grades = {}
+        if Config.practice_level:
+            self._current_level = self._next_level = None
+            self.profile().level_number = Config.practice_level
+            self.play_current_level
+        else:
+            playing = True
+            while playing:
+                self._current_level = self._next_level = None
+                self.profile().level_number += 1
+                playing = self.play_current_level()
+            self.profile().save()
 
     def play_normal_mode(self):
         if Config.practice_level:
@@ -56,7 +82,11 @@ class Game(object):
                         "of the tower and rescued the fair maiden Python")
                 continue_play = False
             self.current_level().tally_points()
-            self.request_next_level()
+            if self.profile().epic:
+                if self.final_report() and not continue_play:
+                    UI.puts(self.final_report())
+            else:
+                self.request_next_level()
         else:
             continue_play = False
             UI.puts("Sorry, you failed level %d. "
@@ -82,7 +112,8 @@ class Game(object):
 
             else:
                 if UI.ask('Would you like to continue on to epic mode?'):
-                    UI.puts('Sorry, epic mode is not yet enabled!')
+                    self.prepare_epic_mode()
+                    UI.puts('Run pythonwarrior again to play epic mode.')
                 else:
                     UI.puts("Staying on current level. "
                             "Try to earn more points next time.")
@@ -92,6 +123,19 @@ class Game(object):
         PlayerGenerator(self.next_level(), self.current_level()).generate()
         self.profile().level_number += 1
         self.profile().save()
+
+    def prepare_epic_mode(self):
+        self.profile().enable_epic_mode()
+        self.profile().level_number = 0
+        self.profile().save()
+
+    def go_back_to_normal_mode(self):
+        self.profile().enable_normal_mode()
+        self.prepare_next_level()
+        UI.puts('Another level has been added since you started epic, '
+                'going back to normal mode')
+        UI.puts('See the updated README in the '
+                'pythonwarrior/%s directory' % self.profile().directory_name())
 
     def profiles(self):
         return map(lambda profile: Profile.load(profile), self.profile_paths())
@@ -128,6 +172,13 @@ class Game(object):
         if not self._next_level:
             self._next_level = self.profile().next_level()
         return self._next_level
+
+    def final_report(self):
+        average_grade = self.profile().calculate_average_grade()
+        if average_grade and not Config.practice_level:
+            report = ""
+            report += ("Your average grade for this tower is: %s\n\n" %
+                       Level.grade_letter(average_grade))
 
     def choose_profile(self):
         profile = UI.choose('profile',

@@ -10,9 +10,13 @@ from pythonwarrior.tower import Tower
 
 class Profile(object):
     def __init__(self):
+        self.epic = False
         self.tower_path = None
         self.warrior_name = None
         self.score = 0
+        self.epic_score = 0
+        self.current_epic_score = 0
+        self.current_epic_grades = {}
         self.average_grade = None
         self.abilities = []
         self.level_number = 0
@@ -23,6 +27,9 @@ class Profile(object):
         return base64.b64encode(pickle.dumps(self))
 
     def save(self):
+        self.update_epic_score()
+        if self.epic:
+            self.level_number = 0
         f = open(self.player_path + '/.profile', 'w')
         f.write(self.encode())
 
@@ -65,7 +72,36 @@ class Profile(object):
     def add_abilities(self, *abilities):
         self.abilities += list(set(abilities))
 
+    def enable_epic_mode(self):
+        self.epic = True
+        if not hasattr(self, 'epic_score'):
+            self.epic_score = 0
+        if not hasattr(self, 'current_epic_score'):
+            self.current_epic_score = 0
+        self.current_epic_score = self.current_epic_score or 0
+        if not hasattr(self, 'last_level_number'):
+            self.last_level_number = self.level_number
+        self.last_level_number = self.last_level_number or self.level_number
+
     def enable_normal_mode(self):
+        self.epic = False
+        self.epic_score = 0
+        self.current_epic_score = 0
+        self.current_epic_grades = {}
         self.average_grade = None
         self.level_number = self.last_level_number
         self.last_level_number = None
+
+    def level_after_epic(self):
+        if self.last_level_number:
+            return Level(self, self.last_level_number + 1).exists()
+
+    def update_epic_score(self):
+        if self.current_epic_score > self.epic_score:
+            self.epic_score = self.current_epic_score
+            self.average_grade = self.calculate_average_grade()
+
+    def calculate_average_grade(self):
+        if len(self.current_epic_grades) > 0:
+            summed_values = sum(self.current_epic_grades.values())
+            return summed_values / len(self.current_epic_grades)
