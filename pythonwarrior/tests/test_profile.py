@@ -27,16 +27,19 @@ class TestProfile(unittest.TestCase):
         self.assertEqual(self.profile.abilities, ['foo', 'bar'])
 
     def test_should_encode_with_pickle_and_base64(self):
-        self.assertEqual(self.profile.encode(), base64.b64encode(pickle.dumps(self.profile)))
+        self.assertEqual(self.profile.encode(),
+                         base64.b64encode(pickle.dumps(self.profile)))
 
     def test_should_decode_with_pickle_and_base64(self):
-        self.assertEqual(Profile.decode(self.profile.encode()).warrior_name, self.profile.warrior_name)
+        self.assertEqual(Profile.decode(self.profile.encode()).warrior_name,
+                         self.profile.warrior_name)
 
     @mock.patch('__builtin__.open')
     def test_load_should_read_file_decode_and_set_player_path(self, mock_open):
         profile = mock.Mock()
         mock_open.read.return_value = "encoded_profile"
-        with mock.patch('pythonwarrior.profile.Profile.decode', return_value=profile):
+        with mock.patch('pythonwarrior.profile.Profile.decode',
+                        return_value=profile):
             self.assertEqual(Profile.load('path/to/.profile'), profile)
             mock_open.assert_called_once_with("path/to/.profile")
 

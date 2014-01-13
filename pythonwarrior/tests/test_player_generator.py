@@ -12,5 +12,6 @@ class TestPlayerGenerator(unittest.TestCase):
         self.generator = PlayerGenerator(self.level, self.previous_level)
 
     def test_should_know_templates_path(self):
-        expected = os.path.normpath(os.path.dirname(__file__) + '/../templates'),
+        expected = os.path.normpath(os.path.dirname(__file__) +
+                                    '/../templates'),
         self.assertEqual(self.generator.templates_path(), expected[0])

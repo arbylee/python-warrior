@@ -1,6 +1,7 @@
 import unittest
 from pythonwarrior.units.captive import Captive
 
+
 class TestCaptive(unittest.TestCase):
     def setUp(self):
         self.captive = Captive()

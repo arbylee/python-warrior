@@ -2,6 +2,7 @@ import mock
 import unittest
 from pythonwarrior.abilities.walk import Walk
 
+
 class TestWalk(unittest.TestCase):
     def setUp(self):
         self.space = mock.Mock()

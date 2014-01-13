@@ -3,7 +3,7 @@ import unittest
 from pythonwarrior.level import Level
 from pythonwarrior.level_loader import LevelLoader
 from pythonwarrior.profile import Profile
-from pythonwarrior.units.warrior import Warrior
+
 
 class TestLevelLoader(unittest.TestCase):
     def setUp(self):
@@ -25,8 +25,8 @@ class TestLevelLoader(unittest.TestCase):
 
     def test_should_be_able_to_add_stairs(self):
         with mock.patch.object(self.level.floor, 'place_stairs') as mock_ps:
-            self.loader.stairs(1,2)
-            mock_ps.assert_called_once_with(1,2)
+            self.loader.stairs(1, 2)
+            mock_ps.assert_called_once_with(1, 2)
 
     def test_should_accept_a_function_to_apply_to_new_unit(self):
         def some_function(unit):
@@ -35,7 +35,7 @@ class TestLevelLoader(unittest.TestCase):
 
         unit = self.loader.unit('unit_base', 1, 2, "north", func=some_function)
         self.assertEqual(unit.__class__.__name__, "UnitBase")
-        self.assertTrue(unit.position.at(1,2))
+        self.assertTrue(unit.position.at(1, 2))
         self.assertEqual(unit.health, 5)
 
     @unittest.skip

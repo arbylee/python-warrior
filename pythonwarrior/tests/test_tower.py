@@ -1,6 +1,7 @@
 import unittest
 from pythonwarrior.tower import Tower
 
+
 class TestTower(unittest.TestCase):
     def setUp(self):
         self.tower = Tower('path/to/tower')

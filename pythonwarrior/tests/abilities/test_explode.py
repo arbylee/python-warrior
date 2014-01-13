@@ -4,6 +4,7 @@ from pythonwarrior.floor import Floor
 from pythonwarrior.units.captive import Captive
 from pythonwarrior.units.base import UnitBase
 
+
 class TestExplode(unittest.TestCase):
     def setUp(self):
         self.floor = Floor()

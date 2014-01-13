@@ -2,6 +2,7 @@ import mock
 import unittest
 from pythonwarrior.units.warrior import Warrior
 
+
 class TestWarrior(unittest.TestCase):
     def setUp(self):
         self.warrior = Warrior()
@@ -23,7 +24,8 @@ class TestWarrior(unittest.TestCase):
         self.assertEqual(self.warrior.score, 5)
 
     @mock.patch('pythonwarrior.units.warrior.Warrior.player')
-    def test_should_call_player_play_turn_and_pass_turn_to_player(self, mock_player):
+    def test_should_call_player_play_turn_and_pass_turn_to_player(self,
+                                                                  mock_player):
         returned_player = mock.Mock()
         mock_player.return_value = returned_player
         self.warrior.play_turn('turn')

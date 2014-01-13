@@ -100,7 +100,7 @@ class TestPlaying(unittest.TestCase):
         self.level.play(2)
         self.level.load_level.assert_called_once_with()
 
-    def test_should_call_prepare_turn_and_play_turn_on_each_object_specified_number_of_times(self):
+    def test_prepare_turn_and_play_turn_each_object_specified_amount(self):
         unit = Warrior()
         unit.prepare_turn = mock.Mock()
         unit.perform_turn = mock.Mock()
