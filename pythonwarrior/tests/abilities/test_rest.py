@@ -1,4 +1,6 @@
+import mock
 import unittest
+
 from pythonwarrior.abilities.rest import Rest
 from pythonwarrior.units.warrior import Warrior
 
@@ -12,16 +14,23 @@ class TestRest(unittest.TestCase):
         self.warrior.max_health = 20
         self.warrior._health = 10
         self.rest.perform()
-        self.assertEquals(12, self.warrior.health)
+        self.assertEqual(12, self.warrior.health)
 
-    def test_should_add_health_what_at_max(self):
+    def test_should_not_add_health_when_at_max(self):
         self.warrior.max_health = 20
         self._health = 20
         self.rest.perform()
-        self.assertEquals(20, self.warrior.health)
+        self.assertEqual(20, self.warrior.health)
 
     def test_should_not_go_over_max_health(self):
         self.warrior.max_health = 20
         self._health = 19
         self.rest.perform()
-        self.assertEquals(20, self.warrior.health)
+        self.assertEqual(20, self.warrior.health)
+
+    def test_should_say_something_if_at_full_health(self):
+        self.warrior.max_health = 20
+        self.warrior.say = mock.Mock()
+        self._health = 20
+        self.rest.perform()
+        self.assertTrue(self.warrior.say.called)

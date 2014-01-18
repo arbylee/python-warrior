@@ -15,3 +15,5 @@ class Rest(AbilityBase):
                            "up to %(current)d health" %
                            {'heal_amount': amount,
                                'current': self._unit.health})
+        else:
+            self._unit.say("is already fit as a fiddle")
