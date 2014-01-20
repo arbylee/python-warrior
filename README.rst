@@ -212,6 +212,12 @@ Make sure to try the different options you can pass to the pythonwarrior command
 Versions
 ========
 
+0.0.6
+-----
+
+* Add epic mode
+* Fix bug when a user rests at full health
+
 0.0.5
 -----
 
