@@ -212,6 +212,12 @@ Make sure to try the different options you can pass to the pythonwarrior command
 Versions
 ========
 
+0.0.7
+-----
+
+* Fix bug where ticking captives don't explode after being hurt by detonate
+* Add command line options
+
 0.0.6
 -----
 
