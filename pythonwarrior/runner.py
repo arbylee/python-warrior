@@ -22,6 +22,8 @@ class Runner(object):
         parser = argparse.ArgumentParser(description='Process options')
         parser.add_argument('-d', '--directory', action=SetDirectory,
                             help='Run under given directory')
+        parser.add_argument('-l', '--level', action=SetLevel, type=int,
+                            help='Practice level on epic')
 
         parser.parse_args()
 
@@ -29,3 +31,8 @@ class Runner(object):
 class SetDirectory(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
         Config.path_prefix = values
+
+
+class SetLevel(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        Config.practice_level = values
