@@ -26,6 +26,8 @@ class Runner(object):
                             help='Practice level on epic')
         parser.add_argument('-s', '--skip', action=SkipInput, nargs=0,
                             help='Skip user input')
+        parser.add_argument('-t', '--time', action=SetDelay, type=float,
+                            help='Delay each turn by seconds')
 
         parser.parse_args()
 
@@ -43,3 +45,8 @@ class SetLevel(argparse.Action):
 class SkipInput(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
         Config.skip_input = True
+
+
+class SetDelay(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        Config.delay = values
