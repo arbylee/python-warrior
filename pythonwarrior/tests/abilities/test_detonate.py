@@ -1,3 +1,4 @@
+import mock
 import unittest
 
 from pythonwarrior.abilities.detonate import Detonate
@@ -42,3 +43,10 @@ class TestDetonate(unittest.TestCase):
     def test_should_deal_4_damage_to_the_user(self):
         self.detonate.perform()
         self.assertEqual(16, self.warrior._health)
+
+    def test_should_cause_ticking_captives_to_explode(self):
+        mock_explode = mock.Mock()
+        self.target.abilities['explode_'] = mock_explode
+        self.floor.add(self.target, 1, 1)
+        self.detonate.perform()
+        self.assertTrue(mock_explode.perform.called)

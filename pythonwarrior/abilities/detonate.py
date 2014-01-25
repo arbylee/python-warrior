@@ -20,9 +20,9 @@ class Detonate(AbilityBase):
         if self._unit.position:
             receiver = self.space(direction, x, y).unit
             if receiver:
-                if receiver.abilities.get('explode'):
+                if receiver.abilities.get('explode_'):
                     receiver.say("caught in bomb's flames which "
                                  "detonates ticking explosive")
-                    receiver.abilities['explode'].perform()
+                    receiver.abilities['explode_'].perform()
                 else:
                     self.damage(receiver, damage_amount)
