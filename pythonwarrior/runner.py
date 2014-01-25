@@ -1,4 +1,5 @@
-from optparse import OptionParser
+import argparse
+
 from pythonwarrior.config import Config
 from pythonwarrior.game import Game
 
@@ -18,6 +19,13 @@ class Runner(object):
         self.game.start()
 
     def parse_options(self):
-        #TODO FINISH ME!!!
-        options = OptionParser()
-        return options
+        parser = argparse.ArgumentParser(description='Process options')
+        parser.add_argument('-d', '--directory', action=SetDirectory,
+                            help='Run under given directory')
+
+        parser.parse_args()
+
+
+class SetDirectory(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        Config.path_prefix = values
