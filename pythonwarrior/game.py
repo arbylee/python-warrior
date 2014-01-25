@@ -48,7 +48,7 @@ class Game(object):
         if Config.practice_level:
             self._current_level = self._next_level = None
             self.profile().level_number = Config.practice_level
-            self.play_current_level
+            self.play_current_level()
         else:
             playing = True
             while playing:
