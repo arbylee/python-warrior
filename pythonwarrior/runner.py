@@ -24,6 +24,8 @@ class Runner(object):
                             help='Run under given directory')
         parser.add_argument('-l', '--level', action=SetLevel, type=int,
                             help='Practice level on epic')
+        parser.add_argument('-s', '--skip', action=SkipInput, nargs=0,
+                            help='Skip user input')
 
         parser.parse_args()
 
@@ -36,3 +38,8 @@ class SetDirectory(argparse.Action):
 class SetLevel(argparse.Action):
     def __call__(self, parser, namespace, values, option_string=None):
         Config.practice_level = values
+
+
+class SkipInput(argparse.Action):
+    def __call__(self, parser, namespace, values, option_string=None):
+        Config.skip_input = True
