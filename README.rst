@@ -153,29 +153,12 @@ Whenever you sense an area, often one or multiple spaces (in an array) will be r
   
   space.is_ticking
     Returns true if this space contains a bomb which will explode in time.
-  
-  space.is_golem
-    Returns true if a golem is occupying this space.
 
 You will often call these methods directly after a sense. For example, the "feel" sense returns one space. You can call "captive" on this to determine if a captive is in front of you.
 
 ::
 
   warrior.feel().is_captive()
-
-
-Golem
-=====
-
-Along your journey you may discover the ability to create a golem. This is a separate unit which you also control. The turn handling is done through a block. Here is an example.
-
-::
-
-  warrior.form_ do |golem|
-    golem.attack_() if golem.feel().is_enemy()
-  end
-
-Complex logic can be placed in this block just like in the player turn method. You may want to move the logic into its own class or create multiple classes for different types of golems. You can create multiple golems in a level, but each one will take half of the warrior's health.
 
 
 Epic Mode
