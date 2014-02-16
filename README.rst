@@ -195,6 +195,11 @@ Make sure to try the different options you can pass to the pythonwarrior command
 Versions
 ========
 
+0.0.8
+-----
+
+* Minor documentation updates
+
 0.0.7
 -----
 
