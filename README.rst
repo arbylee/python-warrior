@@ -35,9 +35,9 @@ Here is a simple example which will instruct the warrior to attack if he feels a
 
   class Player(object):
     def play_turn(self, warrior):
-      if warrior.feel().is_enemy()
+      if warrior.feel().is_enemy():
         warrior.attack_()
-      else
+      else:
         warrior.walk_()
 
 Once you are done editing player.py, save the file and run the "pythonwarrior" command again to start playing the level. The play happens through a series of turns. On each one, your "play_turn" method is called along with any enemy's.
